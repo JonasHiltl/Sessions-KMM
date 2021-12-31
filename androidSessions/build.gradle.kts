@@ -54,4 +54,10 @@ dependencies {
         implementation(material)
         implementation(navigation)
     }
+
+    with(Deps.Koin) {
+        implementation(core)
+        implementation(android)
+        implementation(compose)
+    }
 }
