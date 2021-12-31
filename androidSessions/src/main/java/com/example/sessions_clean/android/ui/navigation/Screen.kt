@@ -6,6 +6,7 @@ const val HOME_GRAPH_ROUTE = "home"
 
 sealed class Screen(val route: String) {
     object Home: Screen(route = "home_screen")
+    object AccountSelection: Screen(route = "account_selection")
     object Login: Screen(route = "login_screen")
     object Register: Screen(route = "register_screen")
 }

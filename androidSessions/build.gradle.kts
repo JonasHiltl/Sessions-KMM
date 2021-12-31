@@ -35,16 +35,6 @@ android {
 dependencies {
     implementation(project(":shared"))
 
-    with(Deps.Compose) {
-        implementation(compiler)
-        implementation(ui)
-        implementation(uiGraphics)
-        implementation(uiTooling)
-        implementation(foundationLayout)
-        implementation(material)
-        implementation(navigation)
-    }
-
     with (Deps.Android) {
         implementation(material)
     }
@@ -53,5 +43,15 @@ dependencies {
         implementation(lifecycleViewmodelKtx)
         implementation(lifecycleRuntimeKtx)
         implementation(activityCompose)
+    }
+
+    with(Deps.Compose) {
+        implementation(compiler)
+        implementation(ui)
+        implementation(uiGraphics)
+        implementation(uiTooling)
+        implementation(foundationLayout)
+        implementation(material)
+        implementation(navigation)
     }
 }

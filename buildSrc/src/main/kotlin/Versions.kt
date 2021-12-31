@@ -13,4 +13,8 @@ object Versions {
     const val lifecycleKtx = "2.4.0-rc01"
     const val lifecycleRuntimeKtx = lifecycleKtx
     const val lifecycleViewmodelKtx = lifecycleKtx
+
+    const val koin= "3.1.4"
+
+    const val ktor = "1.6.7"
 }

@@ -21,23 +21,48 @@ kotlin {
             baseName = "shared"
         }
     }
-    
+
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+                with(Deps.Koin) {
+                    api(core)
+                    api(test)
+                }
+
+                with(Deps.Ktor) {
+                    implementation(clientCore)
+                    implementation(clientLogging)
+                    implementation(clientSerialization)
+                }
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
         }
-        val androidMain by getting
+        val androidMain by getting {
+            dependencies {
+                with(Deps.Ktor) {
+                    implementation(clientAndroid)
+                }
+            }
+        }
         val androidTest by getting {
             dependencies {
                 implementation(kotlin("test-junit"))
                 implementation("junit:junit:4.13.2")
             }
         }
-        val iosX64Main by getting
+        val iosX64Main by getting {
+            dependencies {
+                with(Deps.Ktor) {
+                    implementation(clientIos)
+                }
+            }
+        }
         val iosArm64Main by getting
         //val iosSimulatorArm64Main by getting
         val iosMain by creating {

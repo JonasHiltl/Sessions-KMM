@@ -1,18 +1,12 @@
 package com.example.sessions_clean.android
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.sessions_clean.Greeting
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.Text
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.sessions_clean.Greeting
 import com.example.sessions_clean.android.ui.navigation.nav_graph.SetupNavGraph
 import com.example.sessions_clean.android.ui.theme.M3Themee
 

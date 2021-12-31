@@ -14,7 +14,7 @@ fun LoginScreen(
     navController: NavController
 ) {
     Text(
-        "login",
+        "Login",
         modifier = Modifier.clickable {
             navController.navigate(route = Screen.Register.route)
         },
