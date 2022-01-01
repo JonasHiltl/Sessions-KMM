@@ -3,6 +3,8 @@ object Versions {
     const val androidCompileSdk = 32
     const val androidTargetSdk = androidCompileSdk
 
+    const val kotlin = "1.6.10"
+
     const val compose = "1.1.0-rc01"
     const val composeCompiler = "1.1.0-rc02"
     const val navCompose = "2.4.0-rc01"
