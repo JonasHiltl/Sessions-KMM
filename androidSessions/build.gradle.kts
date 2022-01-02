@@ -51,8 +51,14 @@ dependencies {
         implementation(uiGraphics)
         implementation(uiTooling)
         implementation(foundationLayout)
-        implementation(material)
+        implementation(material3)
         implementation(navigation)
+        implementation(icons)
+        implementation(iconsExtended)
+    }
+
+    with(Deps.Google) {
+        implementation(material)
     }
 
     with(Deps.Koin) {

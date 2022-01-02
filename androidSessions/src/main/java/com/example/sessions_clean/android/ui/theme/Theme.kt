@@ -7,15 +7,15 @@ import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 
 private val lightColorTheme = lightColorScheme(
-    primary = primary,
+    primary = primaryDark,
 )
 
 private val darkColorTheme = darkColorScheme(
-    primary = primary,
+    primary = primaryDark,
 )
 
 @Composable
-fun M3Themee(
+fun M3Theme(
     darkTheme: Boolean? = isSystemInDarkTheme(),
     content: @Composable () -> Unit,
 ) {
