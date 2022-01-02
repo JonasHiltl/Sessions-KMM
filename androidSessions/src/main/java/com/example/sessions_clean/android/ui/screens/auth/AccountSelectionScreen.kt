@@ -141,8 +141,7 @@ fun AccountSelectionScreen(
         ) {
             Text(
                 "What describes you the best?",
-                fontSize = MaterialTheme.typography.headlineLarge.fontSize,
-                fontWeight = FontWeight.SemiBold,
+                style = MaterialTheme.typography.headlineLarge,
                 textAlign = TextAlign.Center
             )
             Row(

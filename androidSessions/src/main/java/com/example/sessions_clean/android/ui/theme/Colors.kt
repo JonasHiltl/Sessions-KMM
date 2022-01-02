@@ -8,10 +8,12 @@ val primaryLight = Color(0xFF6A4EE6)
 val gradientPurple = Color(0xFF642B73)
 val gradientPink = Color(0xFFB942C6)
 
-object darkColors {
+object DarkColors {
     val background = Color(0xFF0F0F11)
+    val surface = Color(0xFF171718)
 }
 
-object lightColors {
+object LightColors {
     val background = Color(0xFFF7FbFF)
+    val surface = Color(0xFFF1F3FD)
 }
