@@ -8,10 +8,12 @@ import androidx.compose.runtime.Composable
 
 private val lightColorTheme = lightColorScheme(
     primary = primaryDark,
+    background = lightColors.background
 )
 
 private val darkColorTheme = darkColorScheme(
     primary = primaryDark,
+    background = lightColors.background
 )
 
 @Composable

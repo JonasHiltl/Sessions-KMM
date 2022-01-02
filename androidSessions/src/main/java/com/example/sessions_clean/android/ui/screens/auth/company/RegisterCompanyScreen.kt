@@ -1,4 +1,4 @@
-package com.example.sessions_clean.android.ui.screens.auth.person
+package com.example.sessions_clean.android.ui.screens.auth.company
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -18,12 +18,12 @@ import com.example.sessions_clean.android.ui.navigation.HOME_GRAPH_ROUTE
 import com.example.sessions_clean.android.ui.navigation.Screen
 
 @Composable
-fun RegisterScreen(
+fun RegisterCompanyScreen(
     navController: NavController
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         Text(
-            "Register",
+            "Register Bar & Club",
             modifier = Modifier.clickable {
                 navController.navigate(route = Screen.Login.route)
             },

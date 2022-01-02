@@ -19,4 +19,6 @@ object Versions {
     const val koin= "3.1.4"
 
     const val ktor = "1.6.7"
+
+    const val accompanist = "0.22.0-rc"
 }

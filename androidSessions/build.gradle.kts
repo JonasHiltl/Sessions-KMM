@@ -53,6 +53,7 @@ dependencies {
         implementation(foundationLayout)
         implementation(material3)
         implementation(navigation)
+        implementation(navigationAnimation)
         implementation(icons)
         implementation(iconsExtended)
     }

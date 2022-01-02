@@ -1,5 +1,7 @@
 package com.example.sessions_clean.android.ui.screens.auth
 
+import androidx.compose.animation.Crossfade
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -8,11 +10,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material.icons.filled.ArrowForwardIos
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,8 +24,9 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import com.example.sessions_clean.android.ui.navigation.Screen
 import com.example.sessions_clean.android.ui.theme.*
 
 private enum class AccountType {
@@ -37,9 +38,10 @@ private val animationSpec: FiniteAnimationSpec<Float> = tween(
     easing = FastOutSlowInEasing
 )
 
-@Preview(showBackground = true)
+@ExperimentalAnimationApi
 @Composable
 fun AccountSelectionScreen(
+    navController: NavController
 ) {
     val borderColor = MaterialTheme.colorScheme.onBackground.copy(
         alpha = 0.1f
@@ -95,25 +97,43 @@ fun AccountSelectionScreen(
             AccountType.COMPANY -> 1.1f
         }
     }
-
     Column(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
             .padding(Spacing.s)
             .fillMaxSize(),
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth(),
-            horizontalArrangement = Arrangement.End
-        ) {
-            IconButton(onClick = {}) {
-                Icon(
-                    Icons.Filled.ArrowForwardIos,
-                    contentDescription = "Arrow Forward",
-                )
+        Crossfade(targetState = accountType.value) { type ->
+            when (type) {
+                AccountType.COMPANY -> {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.End
+                    ) {
+                        IconButton(onClick = { navController.navigate(Screen.RegisterCompany.route) }) {
+                            Icon(
+                                Icons.Filled.ArrowForwardIos,
+                                contentDescription = "Navigate to registration as company",
+                            )
+                        }
+                    }
+                }
+                AccountType.PERSON -> {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        horizontalArrangement = Arrangement.Start
+                    ) {
+                        IconButton(onClick = { navController.navigate(Screen.Register.route) }) {
+                            Icon(
+                                Icons.Filled.ArrowBackIos,
+                                contentDescription = "Navigate to registration as person",
+                            )
+                        }
+                    }
+                }
             }
-
         }
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -213,6 +233,21 @@ fun AccountSelectionScreen(
                     )
                 }
             }
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                Text("Already have an account?")
+                TextButton(
+                    onClick = {
+                        navController.navigate(Screen.Login.route)
+                    }
+                ) {
+                    Text("Login")
+                }
+            }
         }
+
     }
 }

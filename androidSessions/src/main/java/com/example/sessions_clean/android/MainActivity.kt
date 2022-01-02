@@ -3,13 +3,13 @@ package com.example.sessions_clean.android
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.sessions_clean.android.ui.navigation.nav_graph.SetupNavGraph
 import com.example.sessions_clean.android.ui.theme.M3Theme
-import com.example.sessions_clean.android.ui.theme.M3Theme
+import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 
+@ExperimentalAnimationApi
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavHostController
 
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            navController = rememberNavController()
+            navController = rememberAnimatedNavController()
             M3Theme() {
                 SetupNavGraph(navController = navController)
             }
