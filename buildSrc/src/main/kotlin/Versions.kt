@@ -21,4 +21,10 @@ object Versions {
     const val ktor = "1.6.7"
 
     const val accompanist = "0.22.0-rc"
+
+    const val settings = "0.8.1"
+
+    const val coroutines = "1.6.0"
+
+    const val dataStore = "1.0.0"
 }

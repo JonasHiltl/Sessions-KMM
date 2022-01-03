@@ -11,9 +11,11 @@ val gradientPink = Color(0xFFB942C6)
 object DarkColors {
     val background = Color(0xFF0F0F11)
     val surface = Color(0xFF171718)
+    val placeholder = Color.White.copy(alpha = 0.25f)
 }
 
 object LightColors {
     val background = Color(0xFFF7FbFF)
     val surface = Color(0xFFF1F3FD)
+    val placeholder = Color.Black.copy(alpha = 0.3f)
 }

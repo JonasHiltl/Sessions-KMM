@@ -1,5 +1,4 @@
 object Deps {
-
     object Android {
         const val material = "com.google.android.material:material:${Versions.material}"
     }
@@ -10,6 +9,7 @@ object Deps {
         const val lifecycleViewmodelKtx =
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleViewmodelKtx}"
         const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
+        const val dataStore = "androidx.datastore:datastore-preferences:${Versions.dataStore}"
     }
 
     object Compose {
@@ -39,11 +39,21 @@ object Deps {
         const val compose = "io.insert-koin:koin-androidx-compose:${Versions.koin}"
     }
 
+    object Kotlin {
+        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+    }
+
     object Ktor {
         const val clientCore = "io.ktor:ktor-client-core:${Versions.ktor}"
         const val clientSerialization = "io.ktor:ktor-client-serialization:${Versions.ktor}"
         const val clientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
         const val clientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
         const val clientLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
+    }
+
+    object Settings {
+        const val core = "com.russhwolf:multiplatform-settings:${Versions.settings}"
+        const val datastore = "com.russhwolf:multiplatform-settings-datastore:${Versions.settings}"
+        const val coroutines = "com.russhwolf:multiplatform-settings-coroutines:${Versions.settings}"
     }
 }

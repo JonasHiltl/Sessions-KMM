@@ -11,7 +11,7 @@ kotlin {
     android()
     iosX64()
     iosArm64()
-    //iosSimulatorArm64() sure all ios dependencies support this target
+    // iosSimulatorArm64()
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -30,10 +30,20 @@ kotlin {
                     api(core)
                 }
 
+                with(Deps.Kotlin) {
+                    implementation(coroutines)
+                }
+
                 with(Deps.Ktor) {
                     implementation(clientCore)
                     implementation(clientLogging)
                     implementation(clientSerialization)
+                }
+
+                with(Deps.Settings) {
+                    implementation(core)
+                    implementation(datastore)
+                    implementation(coroutines)
                 }
             }
         }
@@ -45,6 +55,10 @@ kotlin {
         }
         val androidMain by getting {
             dependencies {
+                with(Deps.AndroidX) {
+                    implementation(dataStore)
+                }
+
                 with(Deps.Ktor) {
                     implementation(clientAndroid)
                 }

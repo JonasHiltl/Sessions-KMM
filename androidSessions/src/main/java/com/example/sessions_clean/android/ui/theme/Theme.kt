@@ -5,6 +5,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val lightColorTheme = lightColorScheme(
     primary = primaryDark,
@@ -27,4 +28,10 @@ fun M3Theme(
         colorScheme = if (darkTheme == true) darkColorTheme else lightColorTheme,
         content = content
     )
+}
+
+object ExtendedTheme {
+    val placeHolder: Color
+        @Composable
+        get() = if (isSystemInDarkTheme()) DarkColors.placeholder else LightColors.placeholder
 }
