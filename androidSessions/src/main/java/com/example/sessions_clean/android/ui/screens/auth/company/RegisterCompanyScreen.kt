@@ -13,8 +13,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.sessions_clean.android.ui.navigation.AUTH_GRAPH_ROUTE
-import com.example.sessions_clean.android.ui.navigation.HOME_GRAPH_ROUTE
 import com.example.sessions_clean.android.ui.navigation.Screen
 
 @Composable
