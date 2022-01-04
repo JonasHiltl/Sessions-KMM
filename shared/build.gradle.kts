@@ -20,7 +20,7 @@ kotlin {
 
     iosTarget("ios") {}
 
-    //iosSimulatorArm64()
+    iosSimulatorArm64()
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -89,7 +89,15 @@ kotlin {
                 }
             }
         }
+
+        val iosSimulatorArm64Main by getting {
+            dependsOn(iosMain)
+        }
+
         val iosTest by getting
+        val iosSimulatorArm64Test by getting {
+            dependsOn(iosTest)
+        }
     }
 }
 
