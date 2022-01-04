@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         startKoin {
             androidLogger()
             androidContext(this@MainActivity)
+            modules(listOf(appModule, viewModelModule))
         }
 
         setContent {
