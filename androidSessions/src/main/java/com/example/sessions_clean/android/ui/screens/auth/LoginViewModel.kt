@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 
-class LoginViewModel(private val savedStateHandle: SavedStateHandle) : ViewModel() {
+class LoginViewModel() : ViewModel() {
     private val _usernameOrEmail = MutableStateFlow("")
     val username: StateFlow<String> = _usernameOrEmail
 
