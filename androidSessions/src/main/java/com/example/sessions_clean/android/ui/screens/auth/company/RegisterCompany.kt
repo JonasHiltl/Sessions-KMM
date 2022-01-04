@@ -16,7 +16,7 @@ import androidx.navigation.NavController
 import com.example.sessions_clean.android.ui.navigation.Screen
 
 @Composable
-fun RegisterCompanyScreen(
+fun RegisterCompany(
     navController: NavController
 ) {
     Column(modifier = Modifier.fillMaxSize()) {

@@ -8,6 +8,9 @@ import androidx.navigation.NavHostController
 import com.example.sessions_clean.android.ui.navigation.nav_graph.SetupNavGraph
 import com.example.sessions_clean.android.ui.theme.M3Theme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import org.koin.android.ext.koin.androidContext
+import org.koin.android.ext.koin.androidLogger
+import org.koin.core.context.startKoin
 
 @ExperimentalAnimationApi
 class MainActivity : AppCompatActivity() {
@@ -15,6 +18,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        startKoin {
+            androidLogger()
+            androidContext(this@MainActivity)
+        }
 
         setContent {
             navController = rememberAnimatedNavController()

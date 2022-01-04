@@ -10,10 +10,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
 import com.example.sessions_clean.android.ui.navigation.AUTH_GRAPH_ROUTE
 import com.example.sessions_clean.android.ui.navigation.Screen
-import com.example.sessions_clean.android.ui.screens.auth.AccountSelectionScreen
-import com.example.sessions_clean.android.ui.screens.auth.LoginScreen
-import com.example.sessions_clean.android.ui.screens.auth.person.RegisterScreen
-import com.example.sessions_clean.android.ui.screens.auth.company.RegisterCompanyScreen
+import com.example.sessions_clean.android.ui.screens.auth.AccountSelection
+import com.example.sessions_clean.android.ui.screens.auth.Login
+import com.example.sessions_clean.android.ui.screens.auth.company.RegisterCompany
+import com.example.sessions_clean.android.ui.screens.auth.person.Register
 import com.google.accompanist.navigation.animation.composable
 
 const val transitionLength = 300
@@ -36,7 +36,7 @@ fun NavGraphBuilder.authNavGraph(
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None },
         ) {
-            LoginScreen(navController = navController)
+            Login(navController = navController)
         }
         composable(
             Screen.Register.route,
@@ -48,7 +48,7 @@ fun NavGraphBuilder.authNavGraph(
             },
             exitTransition = null
         ) {
-            RegisterScreen(navController = navController)
+            Register(navController = navController)
         }
         composable(
             Screen.AccountSelection.route,
@@ -62,7 +62,7 @@ fun NavGraphBuilder.authNavGraph(
                 fadeOut(fadeTransitionSpec)
             }
         ) {
-            AccountSelectionScreen(navController = navController)
+            AccountSelection(navController = navController)
         }
         composable(
             Screen.RegisterCompany.route,
@@ -74,7 +74,7 @@ fun NavGraphBuilder.authNavGraph(
             },
             exitTransition = null
         ) {
-            RegisterCompanyScreen(navController = navController)
+            RegisterCompany(navController = navController)
         }
     }
 }

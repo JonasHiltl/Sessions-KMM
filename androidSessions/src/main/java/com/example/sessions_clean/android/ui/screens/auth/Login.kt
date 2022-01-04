@@ -1,6 +1,7 @@
-package com.example.sessions_clean.android.ui.screens.auth.person
+package com.example.sessions_clean.android.ui.screens.auth
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
@@ -14,7 +15,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -25,12 +28,13 @@ import com.example.sessions_clean.android.ui.navigation.Screen
 import com.example.sessions_clean.android.ui.theme.Spacing
 
 @Composable
-fun RegisterScreen(
+fun Login(
     navController: NavController
 ) {
     val textState = remember {
         mutableStateOf(TextFieldValue())
     }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -50,7 +54,6 @@ fun RegisterScreen(
                 .fillMaxWidth(),
             contentAlignment = Alignment.Center
         ) {
-            ProfileImage()
         }
         Column(
             modifier = Modifier
@@ -65,48 +68,29 @@ fun RegisterScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    "Register",
+                    "Login",
                     modifier = Modifier.padding(bottom = 20.dp),
                     style = MaterialTheme.typography.headlineLarge,
                 )
                 TextField(
                     value = textState.value,
                     onValueChange = { textState.value = it },
-                    placeholder = "Username",
+                    placeholder = "Username or Email",
                     expand = true,
                     modifier = Modifier.padding(bottom = Spacing.m),
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
                 )
-                Row() {
-                    TextField(
-                        value = textState.value,
-                        onValueChange = { textState.value = it },
-                        placeholder = "First Name",
-                        expand = true,
-                        modifier = Modifier
-                            .weight(1f)
-                            .padding(end = Spacing.m)
-                    )
-                    TextField(
-                        value = textState.value,
-                        onValueChange = { textState.value = it },
-                        placeholder = "Last Name",
-                        expand = true,
-                        modifier = Modifier
-                            .weight(1f)
-                    )
-                }
                 TextField(
                     value = textState.value,
                     onValueChange = { textState.value = it },
-                    placeholder = "Email",
+                    placeholder = "Password",
                     expand = true,
-                    modifier = Modifier.padding(top = Spacing.m),
-                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
+                    isPasswordField = true,
                 )
             }
             Column() {
                 Button(
-                    text = "Register",
+                    text = "Login",
                     onClick = {},
                     modifier = Modifier
                         .fillMaxWidth()
@@ -117,11 +101,11 @@ fun RegisterScreen(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text("Joined Before?", style = MaterialTheme.typography.bodyMedium)
+                    Text("Not yet registered?", style = MaterialTheme.typography.bodyMedium)
                     Button(
-                        text = "Login",
+                        text = "Register",
                         onClick = {
-                            navController.navigate(Screen.Login.route)
+                            navController.navigate(Screen.AccountSelection.route)
                         },
                         textButton = true
                     )
@@ -129,5 +113,4 @@ fun RegisterScreen(
             }
         }
     }
-
 }

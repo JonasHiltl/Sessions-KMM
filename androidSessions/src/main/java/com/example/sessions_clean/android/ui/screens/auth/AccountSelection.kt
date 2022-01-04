@@ -43,7 +43,7 @@ private val animationSpec: FiniteAnimationSpec<Float> = tween(
 
 @ExperimentalAnimationApi
 @Composable
-fun AccountSelectionScreen(
+fun AccountSelection(
     navController: NavController
 ) {
     val borderColor = MaterialTheme.colorScheme.onBackground.copy(
