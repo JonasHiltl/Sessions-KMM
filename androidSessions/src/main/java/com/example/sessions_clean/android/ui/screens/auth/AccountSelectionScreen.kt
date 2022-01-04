@@ -153,7 +153,7 @@ fun AccountSelectionScreen(
                     modifier = Modifier
                         .weight(personBoxWeight)
                         .fillMaxHeight(personBoxHeight)
-                        .clip(RoundedCornerShape(Spacing.xl))
+                        .clip(RoundedCornerShape(Spacing.l))
                         .background(
                             Brush.verticalGradient(
                                 colors = if (accountType.value == AccountType.PERSON) listOf(
@@ -170,7 +170,7 @@ fun AccountSelectionScreen(
                                 1.dp,
                                 if (accountType.value == AccountType.PERSON) borderColor else borderColor
                             ),
-                            shape = RoundedCornerShape(Spacing.xl)
+                            shape = RoundedCornerShape(Spacing.l)
                         )
                         .clickable { accountType.value = AccountType.PERSON }
                         .padding(Spacing.m),
@@ -194,7 +194,7 @@ fun AccountSelectionScreen(
                     modifier = Modifier
                         .weight(companyBoxWeight)
                         .fillMaxHeight(companyBoxHeight)
-                        .clip(RoundedCornerShape(Spacing.xl))
+                        .clip(RoundedCornerShape(Spacing.l))
                         .background(
                             Brush.verticalGradient(
                                 colors = if (accountType.value == AccountType.COMPANY) listOf(
@@ -211,7 +211,7 @@ fun AccountSelectionScreen(
                                 1.dp,
                                 if (accountType.value == AccountType.COMPANY) primaryDark else borderColor
                             ),
-                            shape = RoundedCornerShape(Spacing.xl)
+                            shape = RoundedCornerShape(Spacing.l)
                         )
                         .clickable { accountType.value = AccountType.COMPANY }
                         .padding(Spacing.m),

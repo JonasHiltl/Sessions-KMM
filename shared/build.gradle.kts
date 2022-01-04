@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.plugin.mpp.KotlinNativeTarget
+
 plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
@@ -9,9 +11,16 @@ version = "1.0"
 
 kotlin {
     android()
-    iosX64()
-    iosArm64()
-    // iosSimulatorArm64()
+
+    val iosTarget: (String, KotlinNativeTarget.() -> Unit) -> KotlinNativeTarget =
+        if (System.getenv("SDK_NAME")?.startsWith("iphoneos") == true)
+            ::iosArm64
+        else
+            ::iosX64
+
+    iosTarget("ios") {}
+
+    iosSimulatorArm64()
 
     cocoapods {
         summary = "Some description for the Shared Module"
@@ -53,6 +62,7 @@ kotlin {
                 implementation(kotlin("test-annotations-common"))
             }
         }
+
         val androidMain by getting {
             dependencies {
                 with(Deps.AndroidX) {
@@ -70,29 +80,15 @@ kotlin {
                 implementation("junit:junit:4.13.2")
             }
         }
-        val iosX64Main by getting
-        val iosArm64Main by getting
-        //val iosSimulatorArm64Main by getting
-        val iosMain by creating {
+
+        val iosMain by getting {
             dependencies {
                 with(Deps.Ktor) {
                     implementation(clientIos)
                 }
             }
-            dependsOn(commonMain)
-            iosX64Main.dependsOn(this)
-            iosArm64Main.dependsOn(this)
-            //iosSimulatorArm64Main.dependsOn(this)
         }
-        val iosX64Test by getting
-        val iosArm64Test by getting
-        //val iosSimulatorArm64Test by getting
-        val iosTest by creating {
-            dependsOn(commonTest)
-            iosX64Test.dependsOn(this)
-            iosArm64Test.dependsOn(this)
-            //iosSimulatorArm64Test.dependsOn(this)
-        }
+        val iosTest by getting
     }
 }
 
@@ -106,6 +102,5 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
-
     }
 }

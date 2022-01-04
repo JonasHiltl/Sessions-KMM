@@ -28,7 +28,7 @@ fun NavGraphBuilder.authNavGraph(
     navController: NavController
 ) {
     navigation(
-        startDestination = Screen.Register.route,
+        startDestination = Screen.AccountSelection.route,
         route = AUTH_GRAPH_ROUTE
     ) {
         composable(
@@ -46,7 +46,7 @@ fun NavGraphBuilder.authNavGraph(
             },
             exitTransition = null
         ) {
-            RegisterScreen()
+            RegisterScreen(navController = navController)
         }
         composable(
             Screen.AccountSelection.route,
