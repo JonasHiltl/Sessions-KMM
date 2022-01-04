@@ -12,7 +12,10 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material.icons.filled.ArrowForwardIos
-import androidx.compose.material3.*
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -25,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.sessions_clean.android.ui.components.Button
 import com.example.sessions_clean.android.ui.navigation.Screen
 import com.example.sessions_clean.android.ui.theme.*
 
@@ -236,14 +240,12 @@ fun AccountSelectionScreen(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Text("Already have an account?")
-                TextButton(
-                    onClick = {
-                        navController.navigate(Screen.Login.route)
-                    }
-                ) {
-                    Text("Login")
-                }
+                Text("Joined Before?", style = MaterialTheme.typography.bodyMedium)
+                Button(
+                    text = "Login",
+                    onClick = { navController.navigate(Screen.Login.route) },
+                    textButton = true,
+                )
             }
         }
 

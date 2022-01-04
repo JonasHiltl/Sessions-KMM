@@ -28,11 +28,13 @@ fun NavGraphBuilder.authNavGraph(
     navController: NavController
 ) {
     navigation(
-        startDestination = Screen.AccountSelection.route,
+        startDestination = Screen.Login.route,
         route = AUTH_GRAPH_ROUTE
     ) {
         composable(
-            Screen.Login.route
+            Screen.Login.route,
+            enterTransition = { EnterTransition.None },
+            exitTransition = { ExitTransition.None },
         ) {
             LoginScreen(navController = navController)
         }
@@ -50,7 +52,12 @@ fun NavGraphBuilder.authNavGraph(
         }
         composable(
             Screen.AccountSelection.route,
-            enterTransition = { EnterTransition.None },
+            enterTransition = {
+                slideInVertically(
+                    initialOffsetY = { transitionLength },
+                    animationSpec = slideTransitionSpec
+                ) + fadeIn(fadeTransitionSpec)
+            },
             exitTransition = {
                 fadeOut(fadeTransitionSpec)
             }
