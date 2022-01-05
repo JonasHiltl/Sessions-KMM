@@ -16,15 +16,17 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.sessions_clean.android.ui.components.Button
-import com.example.sessions_clean.android.ui.components.TextField
+import com.example.sessions_clean.android.ui.components.CustomTextField
 import com.example.sessions_clean.android.ui.navigation.Screen
 import com.example.sessions_clean.android.ui.theme.Spacing
+import com.example.sessions_clean.presentation.auth.login.LoginEvents
 import com.example.sessions_clean.presentation.auth.login.LoginState
 
 @Composable
 fun LoginScreen(
     navController: NavController,
-    state: LoginState
+    state: LoginState,
+    onTriggerEvent: (LoginEvents) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -63,17 +65,17 @@ fun LoginScreen(
                     modifier = Modifier.padding(bottom = 20.dp),
                     style = MaterialTheme.typography.headlineLarge,
                 )
-                TextField(
+                CustomTextField(
                     value = state.usernameOrEmail,
-                    onValueChange = { },
+                    onValueChange = { onTriggerEvent(LoginEvents.OnUpdateUsernameOrEmail(it)) },
                     placeholder = "Username or Email",
                     expand = true,
                     modifier = Modifier.padding(bottom = Spacing.m),
                     keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email)
                 )
-                TextField(
+                CustomTextField(
                     value = state.password,
-                    onValueChange = { },
+                    onValueChange = { onTriggerEvent(LoginEvents.OnUpdatePassword(it)) },
                     placeholder = "Password",
                     expand = true,
                     isPasswordField = true,

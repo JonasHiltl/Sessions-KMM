@@ -43,6 +43,7 @@ dependencies {
         implementation(lifecycleViewmodelKtx)
         implementation(lifecycleRuntimeKtx)
         implementation(activityCompose)
+        implementation(material)
     }
 
     with(Deps.Compose) {

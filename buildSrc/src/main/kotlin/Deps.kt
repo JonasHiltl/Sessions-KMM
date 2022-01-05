@@ -10,6 +10,7 @@ object Deps {
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleViewmodelKtx}"
         const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
         const val dataStore = "androidx.datastore:datastore-preferences:${Versions.dataStore}"
+        const val material = "androidx.compose.material:material:${Versions.compose}"
     }
 
     object Compose {
@@ -40,7 +41,8 @@ object Deps {
     }
 
     object Kotlin {
-        const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+        const val coroutines =
+            "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     }
 
     object Ktor {
@@ -54,6 +56,7 @@ object Deps {
     object Settings {
         const val core = "com.russhwolf:multiplatform-settings:${Versions.settings}"
         const val datastore = "com.russhwolf:multiplatform-settings-datastore:${Versions.settings}"
-        const val coroutines = "com.russhwolf:multiplatform-settings-coroutines:${Versions.settings}"
+        const val coroutines =
+            "com.russhwolf:multiplatform-settings-coroutines:${Versions.settings}"
     }
 }

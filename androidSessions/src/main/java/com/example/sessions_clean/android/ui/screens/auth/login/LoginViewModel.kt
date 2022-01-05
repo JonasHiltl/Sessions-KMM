@@ -21,6 +21,12 @@ class LoginViewModel(
                     password = state.value.password
                 )
             }
+            is LoginEvents.OnUpdateUsernameOrEmail -> {
+                state.value = state.value.copy(usernameOrEmail = event.usernameOrEmail)
+            }
+            is LoginEvents.OnUpdatePassword -> {
+                state.value = state.value.copy(password = event.password)
+            }
         }
     }
 

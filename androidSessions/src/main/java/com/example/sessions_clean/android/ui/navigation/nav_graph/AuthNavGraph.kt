@@ -41,7 +41,11 @@ fun NavGraphBuilder.authNavGraph(
         ) {
             val loginViewModel: LoginViewModel = getViewModel()
 
-            LoginScreen(navController, loginViewModel.state.value)
+            LoginScreen(
+                navController = navController,
+                state = loginViewModel.state.value,
+                onTriggerEvent = loginViewModel::onTriggerEvent
+            )
         }
         composable(
             Screen.Register.route,
@@ -54,7 +58,11 @@ fun NavGraphBuilder.authNavGraph(
             exitTransition = { ExitTransition.None }
         ) {
             val registerViewModel: RegisterViewModel = getViewModel()
-            RegisterScreen(navController, registerViewModel.state.value)
+            RegisterScreen(
+                navController = navController,
+                state = registerViewModel.state.value,
+                onTriggerEvent = registerViewModel::onTriggerEvent
+            )
         }
         composable(
             Screen.AccountSelection.route,

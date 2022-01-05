@@ -7,28 +7,27 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.sessions_clean.android.ui.components.Button
+import com.example.sessions_clean.android.ui.components.CustomTextField
 import com.example.sessions_clean.android.ui.components.ProfileImage
-import com.example.sessions_clean.android.ui.components.TextField
 import com.example.sessions_clean.android.ui.navigation.Screen
 import com.example.sessions_clean.android.ui.theme.Spacing
+import com.example.sessions_clean.presentation.auth.register.RegisterEvents
 import com.example.sessions_clean.presentation.auth.register.RegisterState
 
 @Composable
 fun RegisterScreen(
     navController: NavController,
-    state: RegisterState
+    state: RegisterState,
+    onTriggerEvent: (RegisterEvents) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -68,35 +67,35 @@ fun RegisterScreen(
                     modifier = Modifier.padding(bottom = 20.dp),
                     style = MaterialTheme.typography.headlineLarge,
                 )
-                TextField(
+                CustomTextField(
                     value = state.username,
-                    onValueChange = { },
+                    onValueChange = { onTriggerEvent(RegisterEvents.OnUpdateUsername(it)) },
                     placeholder = "Username",
                     expand = true,
                     modifier = Modifier.padding(bottom = Spacing.m),
                 )
                 Row() {
-                    TextField(
+                    CustomTextField(
                         value = state.firstname,
-                        onValueChange = { },
+                        onValueChange = { onTriggerEvent(RegisterEvents.OnUpdateFirstname(it)) },
                         placeholder = "First Name",
                         expand = true,
                         modifier = Modifier
                             .weight(1f)
                             .padding(end = Spacing.m)
                     )
-                    TextField(
+                    CustomTextField(
                         value = state.lastname,
-                        onValueChange = { },
+                        onValueChange = { onTriggerEvent(RegisterEvents.OnUpdateLastname(it)) },
                         placeholder = "Last Name",
                         expand = true,
                         modifier = Modifier
                             .weight(1f)
                     )
                 }
-                TextField(
+                CustomTextField(
                     value = state.email,
-                    onValueChange = { },
+                    onValueChange = { onTriggerEvent(RegisterEvents.OnUpdateEmail(it)) },
                     placeholder = "Email",
                     expand = true,
                     modifier = Modifier.padding(top = Spacing.m),

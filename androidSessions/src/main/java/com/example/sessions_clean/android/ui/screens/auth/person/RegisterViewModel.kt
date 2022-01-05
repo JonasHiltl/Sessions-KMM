@@ -25,6 +25,24 @@ class RegisterViewModel(
                     password = state.value.password
                 )
             }
+            is RegisterEvents.OnUpdateUsername -> {
+                state.value = state.value.copy(username = event.username)
+            }
+            is RegisterEvents.OnUpdateFirstname -> {
+                state.value = state.value.copy(firstname = event.firstname)
+            }
+            is RegisterEvents.OnUpdateLastname -> {
+                state.value = state.value.copy(lastname = event.lastname)
+            }
+            is RegisterEvents.OnUpdateEmail -> {
+                state.value = state.value.copy(email = event.email)
+            }
+            is RegisterEvents.OnUpdatePassword -> {
+                state.value = state.value.copy(password = event.password)
+            }
+            is RegisterEvents.OnUpdateRePassword -> {
+                state.value = state.value.copy(rePassword = event.rePassword)
+            }
         }
     }
 
