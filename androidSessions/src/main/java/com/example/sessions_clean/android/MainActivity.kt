@@ -5,6 +5,9 @@ import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.navigation.NavHostController
+import com.example.sessions_clean.android.di.interactorsModule
+import com.example.sessions_clean.android.di.networkModule
+import com.example.sessions_clean.android.di.viewModelModule
 import com.example.sessions_clean.android.ui.navigation.nav_graph.SetupNavGraph
 import com.example.sessions_clean.android.ui.theme.M3Theme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -23,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         startKoin {
             androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
             androidContext(this@MainActivity)
-            modules(listOf(appModule, viewModelModule))
+            modules(listOf(networkModule, viewModelModule, interactorsModule))
         }
 
         setContent {

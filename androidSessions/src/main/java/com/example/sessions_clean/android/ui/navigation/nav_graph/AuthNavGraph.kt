@@ -10,10 +10,10 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
 import com.example.sessions_clean.android.ui.navigation.AUTH_GRAPH_ROUTE
 import com.example.sessions_clean.android.ui.navigation.Screen
-import com.example.sessions_clean.android.ui.screens.auth.AccountSelection
-import com.example.sessions_clean.android.ui.screens.auth.Login
-import com.example.sessions_clean.android.ui.screens.auth.company.RegisterCompany
-import com.example.sessions_clean.android.ui.screens.auth.person.Register
+import com.example.sessions_clean.android.ui.screens.auth.AccountSelectionScreen
+import com.example.sessions_clean.android.ui.screens.auth.company.RegisterCompanyScreen
+import com.example.sessions_clean.android.ui.screens.auth.login.LoginScreen
+import com.example.sessions_clean.android.ui.screens.auth.person.RegisterScreen
 import com.google.accompanist.navigation.animation.composable
 
 const val transitionLength = 300
@@ -36,7 +36,7 @@ fun NavGraphBuilder.authNavGraph(
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None },
         ) {
-            Login(navController = navController)
+            LoginScreen(navController = navController)
         }
         composable(
             Screen.Register.route,
@@ -46,9 +46,9 @@ fun NavGraphBuilder.authNavGraph(
                     animationSpec = slideTransitionSpec
                 ) + fadeIn(fadeTransitionSpec)
             },
-            exitTransition = null
+            exitTransition = { ExitTransition.None }
         ) {
-            Register(navController = navController)
+            RegisterScreen(navController = navController)
         }
         composable(
             Screen.AccountSelection.route,
@@ -62,7 +62,7 @@ fun NavGraphBuilder.authNavGraph(
                 fadeOut(fadeTransitionSpec)
             }
         ) {
-            AccountSelection(navController = navController)
+            AccountSelectionScreen(navController = navController)
         }
         composable(
             Screen.RegisterCompany.route,
@@ -72,9 +72,9 @@ fun NavGraphBuilder.authNavGraph(
                     animationSpec = slideTransitionSpec
                 ) + fadeIn(fadeTransitionSpec)
             },
-            exitTransition = null
+            exitTransition = { ExitTransition.None }
         ) {
-            RegisterCompany(navController = navController)
+            RegisterCompanyScreen(navController = navController)
         }
     }
 }

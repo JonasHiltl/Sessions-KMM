@@ -14,7 +14,7 @@ import androidx.navigation.NavController
 import com.example.sessions_clean.android.ui.navigation.Screen
 
 @Composable
-fun Home(
+fun HomeScreen(
     navController: NavController
 ) {
     Column() {

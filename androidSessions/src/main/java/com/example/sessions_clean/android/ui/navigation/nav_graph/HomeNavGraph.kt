@@ -6,7 +6,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.navigation
 import com.example.sessions_clean.android.ui.navigation.HOME_GRAPH_ROUTE
 import com.example.sessions_clean.android.ui.navigation.Screen
-import com.example.sessions_clean.android.ui.screens.home.Home
+import com.example.sessions_clean.android.ui.screens.home.HomeScreen
 import com.google.accompanist.navigation.animation.composable
 
 @ExperimentalAnimationApi
@@ -20,7 +20,7 @@ fun NavGraphBuilder.homeNavGraph(
         composable(
             Screen.Home.route
         ) {
-            Home(navController = navController)
+            HomeScreen(navController = navController)
         }
     }
 }

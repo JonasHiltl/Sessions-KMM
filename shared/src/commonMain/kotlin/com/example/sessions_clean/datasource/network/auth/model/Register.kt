@@ -5,20 +5,11 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class RegisterRes(
-    @SerialName("username")
-    var username: String,
+    @SerialName("token")
+    var token: String,
 
-    @SerialName("firstname")
-    var firstname: String,
-
-    @SerialName("lastname")
-    var lastname: String,
-
-    @SerialName("email")
-    var email: String,
-
-    @SerialName("password")
-    var password: String,
+    @SerialName("message")
+    var message: String
 )
 
 data class RegisterBody(
