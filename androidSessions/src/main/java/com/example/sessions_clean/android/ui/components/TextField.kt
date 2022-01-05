@@ -34,7 +34,7 @@ fun TextField(
     modifier: Modifier = Modifier,
     placeholder: String? = null,
     expand: Boolean = false,
-    value: TextFieldValue,
+    value: String,
     isPasswordField: Boolean = false,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     visualTransformation: VisualTransformation = VisualTransformation.None,
@@ -70,7 +70,7 @@ fun TextField(
                     )
             ) {
                 BasicTextField(
-                    value = value,
+                    value = TextFieldValue(text = value),
                     onValueChange = onValueChange,
                     singleLine = true,
                     modifier = Modifier
@@ -89,7 +89,7 @@ fun TextField(
                     else
                         visualTransformation
                 )
-                if (value.text.isEmpty() and (placeholder != null)) {
+                if (value.isEmpty() and (placeholder != null)) {
                     Text(
                         placeholder!!,
                         color = ExtendedTheme.placeHolder,

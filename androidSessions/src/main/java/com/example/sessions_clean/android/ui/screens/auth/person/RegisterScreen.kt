@@ -23,14 +23,13 @@ import com.example.sessions_clean.android.ui.components.ProfileImage
 import com.example.sessions_clean.android.ui.components.TextField
 import com.example.sessions_clean.android.ui.navigation.Screen
 import com.example.sessions_clean.android.ui.theme.Spacing
+import com.example.sessions_clean.presentation.auth.register.RegisterState
 
 @Composable
 fun RegisterScreen(
-    navController: NavController
+    navController: NavController,
+    state: RegisterState
 ) {
-    val textState = remember {
-        mutableStateOf(TextFieldValue())
-    }
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -70,16 +69,16 @@ fun RegisterScreen(
                     style = MaterialTheme.typography.headlineLarge,
                 )
                 TextField(
-                    value = textState.value,
-                    onValueChange = { textState.value = it },
+                    value = state.username,
+                    onValueChange = { },
                     placeholder = "Username",
                     expand = true,
                     modifier = Modifier.padding(bottom = Spacing.m),
                 )
                 Row() {
                     TextField(
-                        value = textState.value,
-                        onValueChange = { textState.value = it },
+                        value = state.firstname,
+                        onValueChange = { },
                         placeholder = "First Name",
                         expand = true,
                         modifier = Modifier
@@ -87,8 +86,8 @@ fun RegisterScreen(
                             .padding(end = Spacing.m)
                     )
                     TextField(
-                        value = textState.value,
-                        onValueChange = { textState.value = it },
+                        value = state.lastname,
+                        onValueChange = { },
                         placeholder = "Last Name",
                         expand = true,
                         modifier = Modifier
@@ -96,8 +95,8 @@ fun RegisterScreen(
                     )
                 }
                 TextField(
-                    value = textState.value,
-                    onValueChange = { textState.value = it },
+                    value = state.email,
+                    onValueChange = { },
                     placeholder = "Email",
                     expand = true,
                     modifier = Modifier.padding(top = Spacing.m),

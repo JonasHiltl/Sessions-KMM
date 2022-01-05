@@ -9,7 +9,7 @@ import com.example.sessions_clean.domain.util.settings
 import com.russhwolf.settings.ExperimentalSettingsApi
 import kotlinx.coroutines.flow.flow
 
-class Login(
+class LoginInteractor(
     private val authService: AuthService,
 ) {
     @ExperimentalSettingsApi

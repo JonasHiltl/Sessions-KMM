@@ -13,8 +13,11 @@ import com.example.sessions_clean.android.ui.navigation.Screen
 import com.example.sessions_clean.android.ui.screens.auth.AccountSelectionScreen
 import com.example.sessions_clean.android.ui.screens.auth.company.RegisterCompanyScreen
 import com.example.sessions_clean.android.ui.screens.auth.login.LoginScreen
+import com.example.sessions_clean.android.ui.screens.auth.login.LoginViewModel
 import com.example.sessions_clean.android.ui.screens.auth.person.RegisterScreen
+import com.example.sessions_clean.android.ui.screens.auth.person.RegisterViewModel
 import com.google.accompanist.navigation.animation.composable
+import org.koin.androidx.compose.getViewModel
 
 const val transitionLength = 300
 val slideTransitionSpec: FiniteAnimationSpec<IntOffset> =
@@ -36,7 +39,9 @@ fun NavGraphBuilder.authNavGraph(
             enterTransition = { EnterTransition.None },
             exitTransition = { ExitTransition.None },
         ) {
-            LoginScreen(navController = navController)
+            val loginViewModel: LoginViewModel = getViewModel()
+
+            LoginScreen(navController, loginViewModel.state.value)
         }
         composable(
             Screen.Register.route,
@@ -48,7 +53,8 @@ fun NavGraphBuilder.authNavGraph(
             },
             exitTransition = { ExitTransition.None }
         ) {
-            RegisterScreen(navController = navController)
+            val registerViewModel: RegisterViewModel = getViewModel()
+            RegisterScreen(navController, registerViewModel.state.value)
         }
         composable(
             Screen.AccountSelection.route,
@@ -62,7 +68,7 @@ fun NavGraphBuilder.authNavGraph(
                 fadeOut(fadeTransitionSpec)
             }
         ) {
-            AccountSelectionScreen(navController = navController)
+            AccountSelectionScreen(navController)
         }
         composable(
             Screen.RegisterCompany.route,
@@ -74,7 +80,7 @@ fun NavGraphBuilder.authNavGraph(
             },
             exitTransition = { ExitTransition.None }
         ) {
-            RegisterCompanyScreen(navController = navController)
+            RegisterCompanyScreen(navController)
         }
     }
 }

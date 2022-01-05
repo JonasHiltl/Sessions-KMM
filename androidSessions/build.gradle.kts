@@ -35,7 +35,7 @@ android {
 dependencies {
     implementation(project(":shared"))
 
-    with (Deps.Android) {
+    with(Deps.Android) {
         implementation(material)
     }
 
@@ -66,5 +66,9 @@ dependencies {
         implementation(core)
         implementation(android)
         implementation(compose)
+    }
+
+    with(Deps.Ktor) {
+        implementation(clientAndroid)
     }
 }
