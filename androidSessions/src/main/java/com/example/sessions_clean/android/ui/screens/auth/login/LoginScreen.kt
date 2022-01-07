@@ -14,7 +14,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
 import com.example.sessions_clean.android.localNavController
 import com.example.sessions_clean.android.ui.components.Button
 import com.example.sessions_clean.android.ui.components.CustomTextField

@@ -11,3 +11,7 @@ sealed class Screen(val route: String) {
     object Register: Screen(route = "register_screen")
     object RegisterCompany: Screen(route = "register_company_screen")
 }
+
+sealed class BottomSheet(val route: String) {
+    object ProfileImageSelectAction: Screen(route = "profile_image_select_action")
+}

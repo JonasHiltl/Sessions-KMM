@@ -31,7 +31,7 @@ val fadeTransitionSpec: FiniteAnimationSpec<Float> =
 @ExperimentalAnimationApi
 fun NavGraphBuilder.authNavGraph() {
     navigation(
-        startDestination = Screen.Login.route,
+        startDestination = Screen.Register.route,
         route = AUTH_GRAPH_ROUTE
     ) {
         composable(

@@ -65,6 +65,7 @@ fun CustomTextField(
                 unfocusedIndicatorColor = Color.Transparent,
                 cursorColor = MaterialTheme.colorScheme.primary,
             ),
+            singleLine = true,
             shape = RoundedCornerShape(Spacing.m),
             textStyle = MaterialTheme.typography.bodyLarge,
             trailingIcon = {

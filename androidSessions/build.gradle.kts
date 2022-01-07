@@ -35,6 +35,11 @@ android {
 dependencies {
     implementation(project(":shared"))
 
+    with(Deps.Accompanist){
+        implementation(navigationAnimation)
+        implementation(navigationMaterial)
+    }
+
     with(Deps.Android) {
         implementation(material)
     }
@@ -54,7 +59,6 @@ dependencies {
         implementation(foundationLayout)
         implementation(material3)
         implementation(navigation)
-        implementation(navigationAnimation)
         implementation(icons)
         implementation(iconsExtended)
     }

@@ -1,4 +1,11 @@
 object Deps {
+    object Accompanist {
+        const val navigationAnimation =
+            "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}"
+        const val navigationMaterial =
+            "com.google.accompanist:accompanist-navigation-material:${Versions.accompanist}"
+    }
+
     object Android {
         const val material = "com.google.android.material:material:${Versions.material}"
     }
@@ -27,8 +34,6 @@ object Deps {
             "androidx.compose.foundation:foundation-layout:${Versions.compose}"
         const val material3 = "androidx.compose.material3:material3:${Versions.material3}"
         const val navigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
-        const val navigationAnimation =
-            "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}"
         const val icons = "androidx.compose.material:material-icons-core:${Versions.compose}"
         const val iconsExtended =
             "androidx.compose.material:material-icons-extended:${Versions.compose}"

@@ -34,4 +34,10 @@ object ExtendedTheme {
     val placeHolder: Color
         @Composable
         get() = if (isSystemInDarkTheme()) DarkColors.placeholder else LightColors.placeholder
+    val orange: Color
+        @Composable
+        get() = Color(0xFBFC9F3B)
+    val green: Color
+        @Composable
+        get() = Color(0xFF58C95D)
 }
