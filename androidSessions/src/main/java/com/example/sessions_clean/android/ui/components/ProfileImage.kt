@@ -1,7 +1,9 @@
 package com.example.sessions_clean.android.ui.components
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ExperimentalMaterialApi
@@ -23,6 +25,7 @@ import com.example.sessions_clean.android.ui.navigation.BottomSheet
 import com.example.sessions_clean.android.ui.theme.ExtendedTheme
 import kotlinx.coroutines.launch
 
+@ExperimentalFoundationApi
 @ExperimentalMaterialApi
 @Composable
 fun ProfileImage() {
@@ -34,7 +37,10 @@ fun ProfileImage() {
             .aspectRatio(1f)
             .clip(CircleShape)
             .background(MaterialTheme.colorScheme.surface)
-            .clickable { navController.navigate(BottomSheet.ProfileImageSelectAction.route) },
+            .combinedClickable(
+                onClick = { navController.navigate(BottomSheet.ProfileImageSelectAction.route) },
+                onLongClick = { navController.navigate(BottomSheet.ProfileImageSelectAction.route) },
+            ),
         contentAlignment = Alignment.Center
     ) {
         Icon(
