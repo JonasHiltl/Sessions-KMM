@@ -4,7 +4,9 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -27,11 +29,13 @@ val slideTransitionSpec: FiniteAnimationSpec<IntOffset> =
 val fadeTransitionSpec: FiniteAnimationSpec<Float> =
     tween(transitionLength, easing = FastOutSlowInEasing)
 
+@ExperimentalMaterial3Api
+@ExperimentalFoundationApi
 @ExperimentalMaterialApi
 @ExperimentalAnimationApi
 fun NavGraphBuilder.authNavGraph() {
     navigation(
-        startDestination = Screen.Register.route,
+        startDestination = Screen.AccountSelection.route,
         route = AUTH_GRAPH_ROUTE
     ) {
         composable(

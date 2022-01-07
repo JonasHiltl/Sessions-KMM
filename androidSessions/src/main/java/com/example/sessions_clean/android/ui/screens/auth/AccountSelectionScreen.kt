@@ -12,10 +12,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material.icons.filled.ArrowForwardIos
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -42,6 +39,7 @@ private val animationSpec: FiniteAnimationSpec<Float> = tween(
     easing = FastOutSlowInEasing
 )
 
+@ExperimentalMaterial3Api
 @ExperimentalAnimationApi
 @Composable
 fun AccountSelectionScreen() {
@@ -101,7 +99,8 @@ fun AccountSelectionScreen() {
             AccountType.COMPANY -> 1.1f
         }
     }
-    Column(
+
+    Scaffold(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
             .padding(Spacing.s)

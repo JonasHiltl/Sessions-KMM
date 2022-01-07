@@ -3,9 +3,7 @@ package com.example.sessions_clean.android.ui.screens.home
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -14,10 +12,12 @@ import androidx.navigation.NavController
 import com.example.sessions_clean.android.localNavController
 import com.example.sessions_clean.android.ui.navigation.Screen
 
+@ExperimentalMaterial3Api
 @Composable
 fun HomeScreen() {
     val navController = localNavController.current
-    Column() {
+
+    Scaffold() {
         Text(
             "Home Screen",
             fontSize = MaterialTheme.typography.headlineLarge.fontSize,
