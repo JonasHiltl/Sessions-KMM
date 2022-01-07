@@ -4,6 +4,7 @@ import androidx.compose.animation.*
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.FiniteAnimationSpec
 import androidx.compose.animation.core.tween
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.ui.unit.IntOffset
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
@@ -26,10 +27,9 @@ val slideTransitionSpec: FiniteAnimationSpec<IntOffset> =
 val fadeTransitionSpec: FiniteAnimationSpec<Float> =
     tween(transitionLength, easing = FastOutSlowInEasing)
 
+@ExperimentalMaterialApi
 @ExperimentalAnimationApi
-fun NavGraphBuilder.authNavGraph(
-    navController: NavController
-) {
+fun NavGraphBuilder.authNavGraph() {
     navigation(
         startDestination = Screen.Login.route,
         route = AUTH_GRAPH_ROUTE
@@ -42,7 +42,6 @@ fun NavGraphBuilder.authNavGraph(
             val loginViewModel: LoginViewModel = getViewModel()
 
             LoginScreen(
-                navController = navController,
                 state = loginViewModel.state.value,
                 onTriggerEvent = loginViewModel::onTriggerEvent
             )
@@ -59,7 +58,6 @@ fun NavGraphBuilder.authNavGraph(
         ) {
             val registerViewModel: RegisterViewModel = getViewModel()
             RegisterScreen(
-                navController = navController,
                 state = registerViewModel.state.value,
                 onTriggerEvent = registerViewModel::onTriggerEvent
             )
@@ -76,7 +74,7 @@ fun NavGraphBuilder.authNavGraph(
                 fadeOut(fadeTransitionSpec)
             }
         ) {
-            AccountSelectionScreen(navController)
+            AccountSelectionScreen()
         }
         composable(
             Screen.RegisterCompany.route,
@@ -88,7 +86,7 @@ fun NavGraphBuilder.authNavGraph(
             },
             exitTransition = { ExitTransition.None }
         ) {
-            RegisterCompanyScreen(navController)
+            RegisterCompanyScreen()
         }
     }
 }

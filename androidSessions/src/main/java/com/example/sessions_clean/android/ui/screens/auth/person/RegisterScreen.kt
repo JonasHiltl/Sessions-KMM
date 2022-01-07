@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.sessions_clean.android.localNavController
 import com.example.sessions_clean.android.ui.components.Button
 import com.example.sessions_clean.android.ui.components.CustomTextField
 import com.example.sessions_clean.android.ui.components.ProfileImage
@@ -23,12 +25,14 @@ import com.example.sessions_clean.android.ui.theme.Spacing
 import com.example.sessions_clean.presentation.auth.register.RegisterEvents
 import com.example.sessions_clean.presentation.auth.register.RegisterState
 
+@ExperimentalMaterialApi
 @Composable
 fun RegisterScreen(
-    navController: NavController,
     state: RegisterState,
     onTriggerEvent: (RegisterEvents) -> Unit
 ) {
+    val navController = localNavController.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()

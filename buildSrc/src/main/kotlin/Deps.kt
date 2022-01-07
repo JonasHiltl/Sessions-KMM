@@ -13,6 +13,11 @@ object Deps {
         const val material = "androidx.compose.material:material:${Versions.compose}"
     }
 
+    object Camera {
+        const val camera2 = "androidx.camera:camera-camera2:${Versions.camera}"
+        const val video = "androidx.camera:camera-video:1.1.0-alpha12"
+    }
+
     object Compose {
         const val compiler = "androidx.compose.compiler:compiler:${Versions.composeCompiler}"
         const val ui = "androidx.compose.ui:ui:${Versions.compose}"

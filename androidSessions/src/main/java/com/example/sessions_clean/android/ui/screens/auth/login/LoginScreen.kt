@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.sessions_clean.android.localNavController
 import com.example.sessions_clean.android.ui.components.Button
 import com.example.sessions_clean.android.ui.components.CustomTextField
 import com.example.sessions_clean.android.ui.navigation.Screen
@@ -24,10 +25,11 @@ import com.example.sessions_clean.presentation.auth.login.LoginState
 
 @Composable
 fun LoginScreen(
-    navController: NavController,
     state: LoginState,
     onTriggerEvent: (LoginEvents) -> Unit
 ) {
+    val navController = localNavController.current
+
     Column(
         modifier = Modifier
             .fillMaxSize()

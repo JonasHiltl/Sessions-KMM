@@ -16,7 +16,7 @@ object Versions {
     const val lifecycleRuntimeKtx = lifecycleKtx
     const val lifecycleViewmodelKtx = lifecycleKtx
 
-    const val koin= "3.1.4"
+    const val koin = "3.1.4"
 
     const val ktor = "1.6.7"
 
@@ -27,4 +27,6 @@ object Versions {
     const val coroutines = "1.6.0"
 
     const val dataStore = "1.0.0"
+
+    const val camera = "1.0.2"
 }

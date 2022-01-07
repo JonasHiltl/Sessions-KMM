@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.sessions_clean.android.localNavController
 import com.example.sessions_clean.android.ui.components.Button
 import com.example.sessions_clean.android.ui.navigation.Screen
 import com.example.sessions_clean.android.ui.theme.*
@@ -43,9 +44,9 @@ private val animationSpec: FiniteAnimationSpec<Float> = tween(
 
 @ExperimentalAnimationApi
 @Composable
-fun AccountSelectionScreen(
-    navController: NavController
-) {
+fun AccountSelectionScreen() {
+    val navController = localNavController.current
+
     val borderColor = MaterialTheme.colorScheme.onBackground.copy(
         alpha = 0.1f
     )

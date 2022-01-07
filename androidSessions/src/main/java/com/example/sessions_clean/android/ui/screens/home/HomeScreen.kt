@@ -11,12 +11,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.sessions_clean.android.localNavController
 import com.example.sessions_clean.android.ui.navigation.Screen
 
 @Composable
-fun HomeScreen(
-    navController: NavController
-) {
+fun HomeScreen() {
+    val navController = localNavController.current
     Column() {
         Text(
             "Home Screen",

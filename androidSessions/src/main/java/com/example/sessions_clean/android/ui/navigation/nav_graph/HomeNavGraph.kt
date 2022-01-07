@@ -10,9 +10,7 @@ import com.example.sessions_clean.android.ui.screens.home.HomeScreen
 import com.google.accompanist.navigation.animation.composable
 
 @ExperimentalAnimationApi
-fun NavGraphBuilder.homeNavGraph(
-    navController: NavController
-) {
+fun NavGraphBuilder.homeNavGraph() {
     navigation(
         startDestination = Screen.Home.route,
         route = HOME_GRAPH_ROUTE
@@ -20,7 +18,7 @@ fun NavGraphBuilder.homeNavGraph(
         composable(
             Screen.Home.route
         ) {
-            HomeScreen(navController = navController)
+            HomeScreen()
         }
     }
 }
