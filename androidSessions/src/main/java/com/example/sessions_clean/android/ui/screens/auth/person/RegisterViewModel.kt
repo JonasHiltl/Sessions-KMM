@@ -61,9 +61,8 @@ class RegisterViewModel(
             password
         )
             .collect(viewModelScope) {
-                it.message?.let {
-                    println("Add message to central queue")
-                    // TODO: Add to central Queue
+                if (it.isError) {
+                    println("Registration failed")
                 }
             }
     }

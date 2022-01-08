@@ -12,6 +12,7 @@ data class RegisterRes(
     var message: String
 )
 
+@Serializable
 data class RegisterBody(
     val username: String,
     val firstname: String,

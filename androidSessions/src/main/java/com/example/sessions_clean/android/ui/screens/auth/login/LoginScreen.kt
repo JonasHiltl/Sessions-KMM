@@ -89,7 +89,7 @@ fun LoginScreen(
                 Column() {
                     Button(
                         text = "Login",
-                        onClick = {},
+                        onClick = {onTriggerEvent(LoginEvents.Login)},
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = Spacing.s),

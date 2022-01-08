@@ -1,22 +1,26 @@
 package com.example.sessions_clean.domain.util
 
+import com.example.sessions_clean.domain.model.GenericNotification
+
 class DataState<T>(
-    val message: String? = null,
+    val message: GenericNotification? = null,
     val data: T? = null,
-    val isLoading: Boolean = false
+    val isLoading: Boolean = false,
+    val isError: Boolean = false
 ) {
     companion object {
         fun <T> error(
-            message: String
+            message: GenericNotification
         ): DataState<T> {
             return DataState(
                 message = message,
-                data = null
+                data = null,
+                isError = true,
             )
         }
 
         fun <T> data(
-            message: String? = null,
+            message: GenericNotification? = null,
             data: T? = null
         ): DataState<T> {
             return DataState(
