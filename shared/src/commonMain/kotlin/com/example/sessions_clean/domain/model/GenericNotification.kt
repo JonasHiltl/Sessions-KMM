@@ -1,14 +1,16 @@
 package com.example.sessions_clean.domain.model
 
-enum class MessageVariant {
-    ERROR, SUCCESS, INFO
+import kotlinx.serialization.json.Json
+
+enum class NotificationVariant {
+    ERROR, SUCCESS
 }
 
 class GenericNotification
 private constructor(builder: Builder) {
     val id: String
     val message: String
-    val variant: MessageVariant
+    val variant: NotificationVariant
 
     init {
         if (builder.id == null) {
@@ -32,7 +34,7 @@ private constructor(builder: Builder) {
         var message: String? = null
             private set
 
-        var variant: MessageVariant? = null
+        var variant: NotificationVariant? = null
             private set
 
         fun id(id: String): Builder {
@@ -40,12 +42,19 @@ private constructor(builder: Builder) {
             return this
         }
 
-        fun message(message: String): Builder {
-            this.message = message
+        fun message(message: String? = null, errorRes: String? = null): Builder {
+            if (errorRes != null) {
+                val error =
+                    Json.decodeFromString(ErrorRes.serializer(), errorRes)
+                this.message = error.message
+            } else {
+                this.message = message
+            }
+
             return this
         }
 
-        fun variant(variant: MessageVariant): Builder {
+        fun variant(variant: NotificationVariant): Builder {
             this.variant = variant
             return this
         }

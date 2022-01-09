@@ -3,10 +3,11 @@ package com.example.sessions_clean.interactors.auth.register
 import com.example.sessions_clean.datasource.network.auth.AuthService
 import com.example.sessions_clean.datasource.network.auth.model.RegisterRes
 import com.example.sessions_clean.datasource.network.profile.ProfileService
-import com.example.sessions_clean.domain.global_state.auth.AuthState
 import com.example.sessions_clean.domain.model.GenericNotification
-import com.example.sessions_clean.domain.model.MessageVariant
+import com.example.sessions_clean.domain.model.NotificationVariant
 import com.example.sessions_clean.domain.util.*
+import io.ktor.client.features.*
+import io.ktor.client.statement.*
 import kotlinx.coroutines.flow.flow
 
 class RegisterInteractor(
@@ -34,21 +35,33 @@ class RegisterInteractor(
                     message = GenericNotification.Builder()
                         .id(registerRes.message)
                         .message(registerRes.message)
-                        .variant(MessageVariant.SUCCESS)
-                        .build(),
+                        .variant(NotificationVariant.SUCCESS),
                     data = registerRes
                 )
             )
-        } catch (e: Exception) {
+        } catch (e: ClientRequestException) {
+            println("Catched a client exception")
+            val res = e.response.readText()
+
             emit(
                 DataState.error<RegisterRes>(
                     message = GenericNotification.Builder()
-                        .id("RegisterInterceptor.Error")
-                        .message(e.message ?: "Register Interceptor Error")
-                        .variant(MessageVariant.ERROR)
-                        .build(),
+                        .id("RegisterInterceptor.Error.Ktor")
+                        .message(errorRes = res)
+                        .variant(NotificationVariant.ERROR),
+                )
+            )
+        } catch (e: Exception) {
+            println("Catched a runtime exception ")
+            emit(
+                DataState.error<RegisterRes>(
+                    message = GenericNotification.Builder()
+                        .id("RegisterInterceptor.Error.Local")
+                        .message("Unrecognized Error")
+                        .variant(NotificationVariant.ERROR),
                 )
             )
         }
+
     }.asCommonFlow()
 }

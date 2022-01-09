@@ -13,6 +13,7 @@ data class UpdateRes(
     var message: String,
 )
 
+@Serializable
 data class UpdateBody(
     val username: String,
     val firstname: String,

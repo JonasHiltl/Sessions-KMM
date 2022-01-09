@@ -4,13 +4,14 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.sessions_clean.android.ui.components.notification_queue.NotificationQueueState
 import com.example.sessions_clean.interactors.auth.register.RegisterInteractor
-import com.example.sessions_clean.presentation.auth.login.LoginEvents
 import com.example.sessions_clean.presentation.auth.register.RegisterEvents
 import com.example.sessions_clean.presentation.auth.register.RegisterState
 
 class RegisterViewModel(
-    private val registerInteractor: RegisterInteractor
+    private val registerInteractor: RegisterInteractor,
+    private val notificationQueueState: NotificationQueueState,
 ) : ViewModel() {
     val state: MutableState<RegisterState> = mutableStateOf(RegisterState())
 
@@ -60,9 +61,9 @@ class RegisterViewModel(
             email,
             password
         )
-            .collect(viewModelScope) {
-                if (it.isError) {
-                    println("Registration failed")
+            .collect(viewModelScope) { it ->
+                if (it.isError and (it.message != null)) {
+                    notificationQueueState.addNotification(it.message!!)
                 }
             }
     }

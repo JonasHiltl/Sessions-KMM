@@ -10,13 +10,15 @@ import androidx.compose.ui.graphics.Color
 private val lightColorTheme = lightColorScheme(
     primary = primaryDark,
     background = LightColors.background,
-    surface = LightColors.surface
+    surface = LightColors.surface,
+    error = errorColor
 )
 
 private val darkColorTheme = darkColorScheme(
     primary = primaryDark,
     background = DarkColors.background,
-    surface = DarkColors.surface
+    surface = DarkColors.surface,
+    error = errorColor
 )
 
 @Composable
@@ -40,4 +42,19 @@ object ExtendedTheme {
     val green: Color
         @Composable
         get() = Color(0xFF58C95D)
+    val errorNotificationBG: Color
+        @Composable
+        get() = if (isSystemInDarkTheme()) DarkColors.errorNotificationBG else LightColors.errorNotificationBG
+    val errorNotificationBorder: Color
+        @Composable
+        get() = if (isSystemInDarkTheme()) DarkColors.errorNotificationBorder else LightColors.errorNotificationBorder
+    val successNotificationBG: Color
+        @Composable
+        get() = if (isSystemInDarkTheme()) DarkColors.successNotificationBG else LightColors.successNotificationBG
+    val successNotificationBorder: Color
+        @Composable
+        get() = if (isSystemInDarkTheme()) DarkColors.successNotificationBorder else LightColors.successNotificationBorder
+    val success: Color
+        @Composable
+        get() = successColor
 }

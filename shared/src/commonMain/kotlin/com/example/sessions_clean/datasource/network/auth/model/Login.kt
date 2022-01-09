@@ -12,6 +12,7 @@ data class LoginRes(
     var message: String
 )
 
+@Serializable
 data class LoginBody(
     val usernameOrEmail: String,
     val password: String,

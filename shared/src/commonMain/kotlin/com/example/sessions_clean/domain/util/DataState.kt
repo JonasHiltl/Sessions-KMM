@@ -3,14 +3,14 @@ package com.example.sessions_clean.domain.util
 import com.example.sessions_clean.domain.model.GenericNotification
 
 class DataState<T>(
-    val message: GenericNotification? = null,
+    val message: GenericNotification.Builder? = null,
     val data: T? = null,
     val isLoading: Boolean = false,
     val isError: Boolean = false
 ) {
     companion object {
         fun <T> error(
-            message: GenericNotification
+            message: GenericNotification.Builder
         ): DataState<T> {
             return DataState(
                 message = message,
@@ -20,7 +20,7 @@ class DataState<T>(
         }
 
         fun <T> data(
-            message: GenericNotification? = null,
+            message: GenericNotification.Builder? = null,
             data: T? = null
         ): DataState<T> {
             return DataState(
