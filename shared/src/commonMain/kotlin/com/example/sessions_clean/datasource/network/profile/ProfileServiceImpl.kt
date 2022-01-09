@@ -2,6 +2,7 @@ package com.example.sessions_clean.datasource.network.profile
 
 import com.example.sessions_clean.datasource.network.profile.model.ProfileBody
 import com.example.sessions_clean.datasource.network.profile.model.UpdateRes
+import com.example.sessions_clean.datasource.network.profile.model.UpdateResDto
 import com.example.sessions_clean.model.Profile
 import io.ktor.client.*
 import io.ktor.client.request.*
@@ -25,8 +26,12 @@ class ProfileServiceImpl(
         }
     }
 
-    override suspend fun update(username: String, firstname: String, lastname: String): UpdateRes {
-        return httpClient.patch<UpdateRes> {
+    override suspend fun update(
+        username: String,
+        firstname: String,
+        lastname: String
+    ): UpdateResDto {
+        return httpClient.patch<UpdateResDto> {
             url("$baseUrl/profile/")
             contentType(ContentType.Application.Json)
             body = ProfileBody(username, firstname, lastname)

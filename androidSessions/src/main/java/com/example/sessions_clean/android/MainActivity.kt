@@ -16,8 +16,10 @@ import com.example.sessions_clean.android.di.appModule
 import com.example.sessions_clean.android.di.interactorsModule
 import com.example.sessions_clean.android.di.networkModule
 import com.example.sessions_clean.android.di.viewModelModule
-import com.example.sessions_clean.android.ui.components.notification_queue.NotificationQueue
+import com.example.sessions_clean.android.ui.components.NotificationQueue
+import com.example.sessions_clean.android.ui.providers.AuthState
 import com.example.sessions_clean.android.ui.navigation.nav_graph.SetupNavGraph
+import com.example.sessions_clean.android.ui.providers.LocalAuthState
 import com.example.sessions_clean.android.ui.theme.M3Theme
 import com.example.sessions_clean.android.ui.theme.Spacing
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -55,7 +57,10 @@ class MainActivity : AppCompatActivity() {
             val bottomSheetNavigator = rememberBottomSheetNavigator()
             val navController = rememberAnimatedNavController(bottomSheetNavigator)
 
-            CompositionLocalProvider(localNavController provides navController) {
+            CompositionLocalProvider(
+                localNavController provides navController,
+                LocalAuthState provides get()
+            ) {
                 M3Theme {
                     NotificationQueue(get()) {
                         ModalBottomSheetLayout(

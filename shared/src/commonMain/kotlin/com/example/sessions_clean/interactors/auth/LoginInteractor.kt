@@ -1,69 +1,57 @@
-package com.example.sessions_clean.interactors.auth.register
+package com.example.sessions_clean.interactors.auth
 
 import com.example.sessions_clean.datasource.network.auth.AuthService
-import com.example.sessions_clean.datasource.network.auth.model.RegisterRes
-import com.example.sessions_clean.datasource.network.profile.ProfileService
+import com.example.sessions_clean.datasource.network.auth.model.LoginRes
+import com.example.sessions_clean.datasource.network.auth.model.toLoginRes
 import com.example.sessions_clean.domain.model.GenericNotification
 import com.example.sessions_clean.domain.model.NotificationVariant
 import com.example.sessions_clean.domain.util.*
+import com.russhwolf.settings.ExperimentalSettingsApi
 import io.ktor.client.features.*
 import io.ktor.client.statement.*
 import kotlinx.coroutines.flow.flow
 
-class RegisterInteractor(
+class LoginInteractor(
     private val authService: AuthService,
-    private val profileService: ProfileService,
 ) {
+    @ExperimentalSettingsApi
     fun execute(
-        username: String,
-        firstname: String,
-        lastname: String,
-        email: String,
-        password: String
-    ): CommonFlow<DataState<RegisterRes>> = flow {
+        usernameOrEmail: String,
+        password: String,
+    ): CommonFlow<DataState<LoginRes>> = flow {
         try {
             emit(DataState.loading())
 
-            kotlinx.coroutines.delay(5000)
+            val loginResDto = authService.login(usernameOrEmail, password)
 
-            val registerRes = authService.register(username, firstname, lastname, email, password)
-            
-            settings.putString(Constants.AUTH_TOKEN, registerRes.token)
-
-            val me = profileService.me()
+            settings.putString(Constants.AUTH_TOKEN, loginResDto.token)
 
             emit(
                 DataState.data(
                     message = GenericNotification.Builder()
-                        .id(registerRes.message)
-                        .message(registerRes.message)
+                        .message(loginResDto.message)
                         .variant(NotificationVariant.SUCCESS),
-                    data = registerRes
+                    data = loginResDto.toLoginRes()
                 )
             )
         } catch (e: ClientRequestException) {
-            println("Catched a client exception")
             val res = e.response.readText()
 
             emit(
-                DataState.error<RegisterRes>(
+                DataState.error<LoginRes>(
                     message = GenericNotification.Builder()
-                        .id("RegisterInterceptor.Error.Ktor")
                         .message(errorRes = res)
                         .variant(NotificationVariant.ERROR),
                 )
             )
         } catch (e: Exception) {
-            println("Catched a runtime exception ")
             emit(
-                DataState.error<RegisterRes>(
+                DataState.error<LoginRes>(
                     message = GenericNotification.Builder()
-                        .id("RegisterInterceptor.Error.Local")
                         .message("Unrecognized Error")
                         .variant(NotificationVariant.ERROR),
                 )
             )
         }
-
     }.asCommonFlow()
 }

@@ -1,4 +1,4 @@
-package com.example.sessions_clean.android.ui.components.notification_queue
+package com.example.sessions_clean.android.ui.providers
 
 import androidx.compose.runtime.mutableStateListOf
 import com.example.sessions_clean.domain.model.GenericNotification

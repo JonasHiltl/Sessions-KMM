@@ -1,7 +1,7 @@
 package com.example.sessions_clean.datasource.network.friends
 
-import com.example.sessions_clean.model.Friend
-import com.example.sessions_clean.model.FriendList
+import com.example.sessions_clean.datasource.network.friends.model.Friend
+import com.example.sessions_clean.datasource.network.friends.model.FriendList
 import com.example.sessions_clean.model.MessageRes
 
 interface FriendService {

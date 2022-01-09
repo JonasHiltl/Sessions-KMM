@@ -4,14 +4,16 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.sessions_clean.android.ui.components.notification_queue.NotificationQueueState
-import com.example.sessions_clean.interactors.auth.register.RegisterInteractor
+import com.example.sessions_clean.android.ui.providers.NotificationQueueState
+import com.example.sessions_clean.android.ui.providers.AuthState
+import com.example.sessions_clean.interactors.auth.RegisterInteractor
 import com.example.sessions_clean.presentation.auth.register.RegisterEvents
 import com.example.sessions_clean.presentation.auth.register.RegisterState
 
 class RegisterViewModel(
     private val registerInteractor: RegisterInteractor,
     private val notificationQueueState: NotificationQueueState,
+    private val authState: AuthState,
 ) : ViewModel() {
     val state: MutableState<RegisterState> = mutableStateOf(RegisterState())
 
@@ -61,12 +63,16 @@ class RegisterViewModel(
             email,
             password
         )
-            .collect(viewModelScope) { it ->
-                it.isLoading.let {
-                    state.value = state.value.copy(isLoading = it)
+            .collect(
+                viewModelScope
+            ) { datastate ->
+                println(datastate.message)
+                datastate.message?.let {
+                    notificationQueueState.addNotification(it)
                 }
-                if (it.isError and (it.message != null)) {
-                    notificationQueueState.addNotification(it.message!!)
+
+                datastate.isLoading.let {
+                    state.value = state.value.copy(isLoading = it)
                 }
             }
     }
