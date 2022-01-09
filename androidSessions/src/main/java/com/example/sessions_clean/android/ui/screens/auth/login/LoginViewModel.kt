@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sessions_clean.android.ui.components.notification_queue.NotificationQueueState
+import com.example.sessions_clean.domain.global_state.auth.AuthState
 import com.example.sessions_clean.interactors.auth.login.LoginInteractor
 import com.example.sessions_clean.presentation.auth.login.LoginEvents
 import com.example.sessions_clean.presentation.auth.login.LoginState
@@ -12,6 +13,7 @@ import com.example.sessions_clean.presentation.auth.login.LoginState
 class LoginViewModel(
     private val loginInteractor: LoginInteractor,
     private val notificationQueueState: NotificationQueueState,
+    private val authState: AuthState,
 ) : ViewModel() {
     val state: MutableState<LoginState> = mutableStateOf(LoginState())
 
@@ -39,6 +41,9 @@ class LoginViewModel(
         ).collect(
             viewModelScope
         ) { it ->
+            it.isLoading.let {
+                state.value = state.value.copy(isLoading = it)
+            }
             it.message?.let {
                 notificationQueueState.addNotification(it)
             }

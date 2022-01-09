@@ -7,6 +7,7 @@ data class RegisterState(
     val email: String = "",
     val password: String = "",
     val rePassword: String = "",
+    val isLoading: Boolean = false,
 ) {
     constructor() : this(
         username = "",
@@ -14,6 +15,7 @@ data class RegisterState(
         lastname = "",
         email = "",
         password = "",
-        rePassword = ""
+        rePassword = "",
+        isLoading = false,
     )
 }

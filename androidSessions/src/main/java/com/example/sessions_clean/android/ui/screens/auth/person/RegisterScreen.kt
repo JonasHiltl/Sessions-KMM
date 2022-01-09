@@ -115,6 +115,7 @@ fun RegisterScreen(
                     Button(
                         text = "Register",
                         onClick = { onTriggerEvent(RegisterEvents.Register) },
+                        isLoading = state.isLoading,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = Spacing.s),

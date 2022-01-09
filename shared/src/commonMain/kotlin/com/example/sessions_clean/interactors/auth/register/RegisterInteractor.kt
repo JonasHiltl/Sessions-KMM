@@ -24,8 +24,10 @@ class RegisterInteractor(
         try {
             emit(DataState.loading())
 
-            val registerRes = authService.register(username, firstname, lastname, email, password)
+            kotlinx.coroutines.delay(5000)
 
+            val registerRes = authService.register(username, firstname, lastname, email, password)
+            
             settings.putString(Constants.AUTH_TOKEN, registerRes.token)
 
             val me = profileService.me()

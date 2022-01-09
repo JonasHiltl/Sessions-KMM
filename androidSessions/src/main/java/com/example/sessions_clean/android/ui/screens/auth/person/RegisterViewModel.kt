@@ -62,6 +62,9 @@ class RegisterViewModel(
             password
         )
             .collect(viewModelScope) { it ->
+                it.isLoading.let {
+                    state.value = state.value.copy(isLoading = it)
+                }
                 if (it.isError and (it.message != null)) {
                     notificationQueueState.addNotification(it.message!!)
                 }

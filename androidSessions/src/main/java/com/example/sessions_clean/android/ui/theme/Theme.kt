@@ -57,4 +57,10 @@ object ExtendedTheme {
     val success: Color
         @Composable
         get() = successColor
+    val disableButtonBG: Color
+        @Composable
+        get() = if (isSystemInDarkTheme()) DarkColors.disableButtonBG else LightColors.disableButtonBG
+    val disableButtonBorder: Color
+        @Composable
+        get() = if (isSystemInDarkTheme()) DarkColors.disableButtonBorder else LightColors.disableButtonBorder
 }

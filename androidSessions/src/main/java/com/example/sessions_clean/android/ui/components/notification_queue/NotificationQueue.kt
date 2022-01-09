@@ -28,7 +28,6 @@ fun NotificationQueue(
                 duration = SnackbarDuration.Short,
                 actionLabel = "Done"
             )
-            state.removeFirstNotification()
         }
     })
 

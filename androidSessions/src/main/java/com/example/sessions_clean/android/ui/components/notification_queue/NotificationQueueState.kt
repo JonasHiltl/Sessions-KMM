@@ -7,6 +7,7 @@ class NotificationQueueState {
     val queue = mutableStateListOf<GenericNotification>()
 
     fun addNotification(notificationInfo: GenericNotification.Builder) {
+        if (queue.isNotEmpty()) queue.removeFirst()
         queue.add(notificationInfo.build())
     }
 

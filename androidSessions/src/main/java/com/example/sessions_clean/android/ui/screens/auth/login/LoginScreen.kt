@@ -89,7 +89,8 @@ fun LoginScreen(
                 Column() {
                     Button(
                         text = "Login",
-                        onClick = {onTriggerEvent(LoginEvents.Login)},
+                        onClick = { onTriggerEvent(LoginEvents.Login) },
+                        isLoading = state.isLoading,
                         modifier = Modifier
                             .fillMaxWidth()
                             .padding(bottom = Spacing.s),

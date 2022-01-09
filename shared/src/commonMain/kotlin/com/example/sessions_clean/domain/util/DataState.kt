@@ -13,6 +13,7 @@ class DataState<T>(
             message: GenericNotification.Builder
         ): DataState<T> {
             return DataState(
+                isLoading = false,
                 message = message,
                 data = null,
                 isError = true,
@@ -24,6 +25,7 @@ class DataState<T>(
             data: T? = null
         ): DataState<T> {
             return DataState(
+                isLoading = false,
                 message = message,
                 data = data,
             )
