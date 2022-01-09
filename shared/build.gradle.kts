@@ -47,12 +47,11 @@ kotlin {
                     implementation(clientCore)
                     implementation(clientLogging)
                     implementation(clientSerialization)
+                    implementation(clientAuth)
                 }
 
                 with(Deps.Settings) {
-                    implementation(core)
-                    implementation(datastore)
-                    implementation(coroutines)
+                    implementation(noArgs)
                 }
             }
         }
@@ -65,10 +64,6 @@ kotlin {
 
         val androidMain by getting {
             dependencies {
-                with(Deps.AndroidX) {
-                    implementation(dataStore)
-                }
-
                 with(Deps.Ktor) {
                     implementation(clientAndroid)
                 }

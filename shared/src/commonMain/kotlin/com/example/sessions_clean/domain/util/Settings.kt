@@ -1,7 +1,5 @@
 package com.example.sessions_clean.domain.util
 
-import com.russhwolf.settings.ExperimentalSettingsApi
-import com.russhwolf.settings.coroutines.FlowSettings
+import com.russhwolf.settings.Settings
 
-@ExperimentalSettingsApi
-expect val settings: FlowSettings
+val settings: Settings = Settings()

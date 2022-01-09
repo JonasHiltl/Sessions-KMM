@@ -61,10 +61,12 @@ object Deps {
         const val clientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
         const val clientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
         const val clientLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
+        const val clientAuth = "io.ktor:ktor-client-auth:${Versions.ktor}"
     }
 
     object Settings {
         const val core = "com.russhwolf:multiplatform-settings:${Versions.settings}"
+        const val noArgs = "com.russhwolf:multiplatform-settings-no-arg:${Versions.settings}"
         const val datastore = "com.russhwolf:multiplatform-settings-datastore:${Versions.settings}"
         const val coroutines =
             "com.russhwolf:multiplatform-settings-coroutines:${Versions.settings}"
