@@ -35,7 +35,7 @@ android {
 dependencies {
     implementation(project(":shared"))
 
-    with(Deps.Accompanist){
+    with(Deps.Accompanist) {
         implementation(navigationAnimation)
         implementation(navigationMaterial)
     }
@@ -75,5 +75,9 @@ dependencies {
 
     with(Deps.Ktor) {
         implementation(clientAndroid)
+    }
+
+    with(Deps.Settings) {
+        implementation(noArgs)
     }
 }
