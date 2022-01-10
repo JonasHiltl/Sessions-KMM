@@ -8,6 +8,7 @@ import com.example.sessions_clean.domain.util.*
 import com.example.sessions_clean.model.Profile
 import io.ktor.client.features.*
 import io.ktor.client.statement.*
+import io.ktor.http.*
 import kotlinx.coroutines.flow.flow
 
 class GetMeInterceptor(
@@ -25,16 +26,28 @@ class GetMeInterceptor(
                 )
             )
         } catch (e: ClientRequestException) {
-            val res = e.response.readText()
-
-            emit(
-                DataState.error<Profile>(
-                    message = GenericNotification.Builder()
-                        .message(errorRes = res)
-                        .variant(NotificationVariant.ERROR),
+            println(e)
+            if (e.response.status === HttpStatusCode.Unauthorized) {
+                emit(
+                    DataState.error<Profile>(
+                        message = GenericNotification.Builder()
+                            .message("Jwt is missing")
+                            .variant(NotificationVariant.ERROR),
+                    )
                 )
-            )
+            } else {
+                val res = e.response.readText()
+
+                emit(
+                    DataState.error<Profile>(
+                        message = GenericNotification.Builder()
+                            .message(errorRes = res)
+                            .variant(NotificationVariant.ERROR),
+                    )
+                )
+            }
         } catch (e: Exception) {
+            println(e)
             emit(
                 DataState.error<Profile>(
                     message = GenericNotification.Builder()

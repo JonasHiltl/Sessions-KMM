@@ -1,8 +1,8 @@
 package com.example.sessions_clean.android
 
 import android.os.Bundle
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,14 +11,15 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import com.example.sessions_clean.android.di.appModule
 import com.example.sessions_clean.android.di.interactorsModule
 import com.example.sessions_clean.android.di.networkModule
 import com.example.sessions_clean.android.di.viewModelModule
 import com.example.sessions_clean.android.ui.components.NotificationQueue
-import com.example.sessions_clean.android.ui.providers.AuthState
 import com.example.sessions_clean.android.ui.navigation.nav_graph.SetupNavGraph
+import com.example.sessions_clean.android.ui.providers.AuthStateController
 import com.example.sessions_clean.android.ui.providers.LocalAuthState
 import com.example.sessions_clean.android.ui.theme.M3Theme
 import com.example.sessions_clean.android.ui.theme.Spacing
@@ -32,7 +33,6 @@ import org.koin.androidx.compose.get
 import org.koin.core.context.startKoin
 import org.koin.core.logger.Level
 
-
 val localNavController = compositionLocalOf<NavHostController> {
     error("No LocalNavController provided")
 }
@@ -42,8 +42,7 @@ val localNavController = compositionLocalOf<NavHostController> {
 @ExperimentalMaterial3Api
 @ExperimentalAnimationApi
 @ExperimentalMaterialNavigationApi
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -53,15 +52,19 @@ class MainActivity : AppCompatActivity() {
             modules(listOf(appModule, networkModule, viewModelModule, interactorsModule))
         }
 
+        installSplashScreen().apply {
+
+        }
+
         setContent {
             val bottomSheetNavigator = rememberBottomSheetNavigator()
             val navController = rememberAnimatedNavController(bottomSheetNavigator)
 
             CompositionLocalProvider(
                 localNavController provides navController,
-                LocalAuthState provides get()
+                LocalAuthState provides get<AuthStateController>().state.value
             ) {
-                M3Theme {
+                M3Theme(darkTheme = true) {
                     NotificationQueue(get()) {
                         ModalBottomSheetLayout(
                             bottomSheetNavigator,

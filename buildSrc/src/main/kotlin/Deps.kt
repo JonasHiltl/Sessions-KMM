@@ -16,8 +16,8 @@ object Deps {
         const val lifecycleViewmodelKtx =
             "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleViewmodelKtx}"
         const val activityCompose = "androidx.activity:activity-compose:${Versions.activityCompose}"
-        const val dataStore = "androidx.datastore:datastore-preferences:${Versions.dataStore}"
         const val material = "androidx.compose.material:material:${Versions.compose}"
+        const val splashScreen = "androidx.core:core-splashscreen:1.0.0-alpha02"
     }
 
     object Camera {
@@ -61,7 +61,6 @@ object Deps {
         const val clientAndroid = "io.ktor:ktor-client-android:${Versions.ktor}"
         const val clientIos = "io.ktor:ktor-client-ios:${Versions.ktor}"
         const val clientLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
-        const val clientAuth = "io.ktor:ktor-client-auth:${Versions.ktor}"
     }
 
     object Settings {

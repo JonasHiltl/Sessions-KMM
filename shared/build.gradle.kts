@@ -47,7 +47,6 @@ kotlin {
                     implementation(clientCore)
                     implementation(clientLogging)
                     implementation(clientSerialization)
-                    implementation(clientAuth)
                 }
 
                 with(Deps.Settings) {

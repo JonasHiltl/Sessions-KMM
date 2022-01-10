@@ -34,6 +34,8 @@ android {
 
 dependencies {
     implementation(project(":shared"))
+    debugImplementation("com.facebook.flipper:flipper:0.127.0")
+    debugImplementation("com.facebook.soloader:soloader:0.10.3")
 
     with(Deps.Accompanist) {
         implementation(navigationAnimation)
@@ -49,6 +51,7 @@ dependencies {
         implementation(lifecycleRuntimeKtx)
         implementation(activityCompose)
         implementation(material)
+        implementation(splashScreen)
     }
 
     with(Deps.Compose) {

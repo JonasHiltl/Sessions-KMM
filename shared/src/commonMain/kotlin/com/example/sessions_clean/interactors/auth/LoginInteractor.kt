@@ -6,9 +6,11 @@ import com.example.sessions_clean.datasource.network.auth.model.toLoginRes
 import com.example.sessions_clean.domain.model.GenericNotification
 import com.example.sessions_clean.domain.model.NotificationVariant
 import com.example.sessions_clean.domain.util.*
+import com.example.sessions_clean.model.Profile
 import com.russhwolf.settings.ExperimentalSettingsApi
 import io.ktor.client.features.*
 import io.ktor.client.statement.*
+import io.ktor.http.*
 import kotlinx.coroutines.flow.flow
 
 class LoginInteractor(
@@ -35,16 +37,28 @@ class LoginInteractor(
                 )
             )
         } catch (e: ClientRequestException) {
-            val res = e.response.readText()
-
-            emit(
-                DataState.error<LoginRes>(
-                    message = GenericNotification.Builder()
-                        .message(errorRes = res)
-                        .variant(NotificationVariant.ERROR),
+            if (e.response.status === HttpStatusCode.Unauthorized) {
+                emit(
+                    DataState.error<LoginRes>(
+                        message = GenericNotification.Builder()
+                            .message("Jwt is missing")
+                            .variant(NotificationVariant.ERROR),
+                    )
                 )
-            )
+            } else {
+                val res = e.response.readText()
+
+                emit(
+                    DataState.error<LoginRes>(
+                        message = GenericNotification.Builder()
+                            .message(errorRes = res)
+                            .variant(NotificationVariant.ERROR),
+                    )
+                )
+            }
         } catch (e: Exception) {
+            println("Login Interceptor Error")
+            println(e)
             emit(
                 DataState.error<LoginRes>(
                     message = GenericNotification.Builder()

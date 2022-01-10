@@ -1,7 +1,6 @@
 package com.example.sessions_clean.datasource.network.profile
 
 import com.example.sessions_clean.datasource.network.profile.model.ProfileBody
-import com.example.sessions_clean.datasource.network.profile.model.UpdateRes
 import com.example.sessions_clean.datasource.network.profile.model.UpdateResDto
 import com.example.sessions_clean.model.Profile
 import io.ktor.client.*

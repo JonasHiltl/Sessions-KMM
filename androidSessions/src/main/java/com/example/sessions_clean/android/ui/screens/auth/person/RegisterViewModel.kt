@@ -5,7 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.sessions_clean.android.ui.providers.NotificationQueueState
-import com.example.sessions_clean.android.ui.providers.AuthState
+import com.example.sessions_clean.android.ui.providers.AuthStateController
 import com.example.sessions_clean.interactors.auth.RegisterInteractor
 import com.example.sessions_clean.presentation.auth.register.RegisterEvents
 import com.example.sessions_clean.presentation.auth.register.RegisterState
@@ -13,7 +13,7 @@ import com.example.sessions_clean.presentation.auth.register.RegisterState
 class RegisterViewModel(
     private val registerInteractor: RegisterInteractor,
     private val notificationQueueState: NotificationQueueState,
-    private val authState: AuthState,
+    private val authStateController: AuthStateController,
 ) : ViewModel() {
     val state: MutableState<RegisterState> = mutableStateOf(RegisterState())
 

@@ -5,7 +5,6 @@ import com.example.sessions_clean.android.ui.screens.auth.person.RegisterViewMod
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
-
 val viewModelModule = module {
     viewModel { LoginViewModel(get(), get(), get()) }
     viewModel { RegisterViewModel(get(), get(), get()) }

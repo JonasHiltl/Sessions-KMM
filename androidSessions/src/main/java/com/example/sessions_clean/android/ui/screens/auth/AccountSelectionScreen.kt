@@ -19,13 +19,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.*
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.sessions_clean.android.localNavController
 import com.example.sessions_clean.android.ui.components.Button
+import com.example.sessions_clean.android.ui.components.backgrounds.Background1
 import com.example.sessions_clean.android.ui.navigation.Screen
 import com.example.sessions_clean.android.ui.theme.*
 
@@ -102,151 +103,154 @@ fun AccountSelectionScreen() {
     Scaffold(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.background)
-            .padding(Spacing.s)
             .fillMaxSize(),
     ) {
-        Crossfade(targetState = accountType.value) { type ->
-            when (type) {
-                AccountType.COMPANY -> {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.End
-                    ) {
-                        IconButton(onClick = { navController.navigate(Screen.RegisterCompany.route) }) {
-                            Icon(
-                                Icons.Filled.ArrowForwardIos,
-                                contentDescription = "Navigate to registration as company",
-                            )
+        Background1()
+        Box(modifier = Modifier.padding(Spacing.m)) {
+            Crossfade(targetState = accountType.value) { type ->
+                when (type) {
+                    AccountType.COMPANY -> {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.End
+                        ) {
+                            IconButton(onClick = { navController.navigate(Screen.RegisterCompany.route) }) {
+                                Icon(
+                                    Icons.Filled.ArrowForwardIos,
+                                    contentDescription = "Navigate to registration as company",
+                                )
+                            }
                         }
                     }
-                }
-                AccountType.PERSON -> {
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth(),
-                        horizontalArrangement = Arrangement.Start
-                    ) {
-                        IconButton(onClick = { navController.navigate(Screen.Register.route) }) {
-                            Icon(
-                                Icons.Filled.ArrowBackIos,
-                                contentDescription = "Navigate to registration as person",
-                            )
+                    AccountType.PERSON -> {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth(),
+                            horizontalArrangement = Arrangement.Start
+                        ) {
+                            IconButton(onClick = { navController.navigate(Screen.Register.route) }) {
+                                Icon(
+                                    Icons.Filled.ArrowBackIos,
+                                    contentDescription = "Navigate to registration as person",
+                                )
+                            }
                         }
                     }
                 }
             }
-        }
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            verticalArrangement = Arrangement.SpaceEvenly
-        ) {
-            Text(
-                "What describes you the best?",
-                style = MaterialTheme.typography.headlineLarge,
-                textAlign = TextAlign.Center
-            )
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.7f),
-                verticalAlignment = Alignment.CenterVertically
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.SpaceEvenly
             ) {
-                Column(
-                    modifier = Modifier
-                        .weight(personBoxWeight)
-                        .fillMaxHeight(personBoxHeight)
-                        .clip(RoundedCornerShape(Spacing.l))
-                        .background(
-                            Brush.verticalGradient(
-                                colors = if (accountType.value == AccountType.PERSON) listOf(
-                                    gradientPink,
-                                    gradientPurple,
-                                ) else listOf(
-                                    Color.Transparent,
-                                    Color.Transparent
-                                )
-                            )
-                        )
-                        .border(
-                            BorderStroke(
-                                1.dp,
-                                if (accountType.value == AccountType.PERSON) borderColor else borderColor
-                            ),
-                            shape = RoundedCornerShape(Spacing.l)
-                        )
-                        .clickable { accountType.value = AccountType.PERSON }
-                        .padding(Spacing.m),
-                    verticalArrangement = Arrangement.Bottom
-                ) {
-                    Text(
-                        "Person",
-                        modifier = Modifier.padding(bottom = Spacing.m),
-                        fontSize = MaterialTheme.typography.headlineMedium.fontSize,
-                        color = if (accountType.value == AccountType.PERSON) Color.White else MaterialTheme.typography.headlineMedium.color
-                    )
-                    Text(
-                        "Discover Bars, Parties & Night Clubs or arrange your own party.",
-                        modifier = Modifier.padding(bottom = Spacing.m),
-                        fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-                        color = if (accountType.value == AccountType.PERSON) Color.White else MaterialTheme.typography.bodyMedium.color
-                    )
-                }
-                Spacer(modifier = Modifier.fillMaxWidth(0.05f))
-                Column(
-                    modifier = Modifier
-                        .weight(companyBoxWeight)
-                        .fillMaxHeight(companyBoxHeight)
-                        .clip(RoundedCornerShape(Spacing.l))
-                        .background(
-                            Brush.verticalGradient(
-                                colors = if (accountType.value == AccountType.COMPANY) listOf(
-                                    primaryLight,
-                                    primaryDark,
-                                ) else listOf(
-                                    Color.Transparent,
-                                    Color.Transparent
-                                )
-                            )
-                        )
-                        .border(
-                            BorderStroke(
-                                1.dp,
-                                if (accountType.value == AccountType.COMPANY) primaryDark else borderColor
-                            ),
-                            shape = RoundedCornerShape(Spacing.l)
-                        )
-                        .clickable { accountType.value = AccountType.COMPANY }
-                        .padding(Spacing.m),
-                    verticalArrangement = Arrangement.Bottom
-                ) {
-                    Text(
-                        "Bar or Night Club",
-                        modifier = Modifier.padding(bottom = Spacing.m),
-                        fontSize = MaterialTheme.typography.headlineMedium.fontSize,
-                        color = if (accountType.value == AccountType.COMPANY) Color.White else MaterialTheme.typography.headlineMedium.color
-                    )
-                    Text(
-                        "Coming soon...",
-                        modifier = Modifier.padding(bottom = Spacing.m),
-                        fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-                        color = if (accountType.value == AccountType.COMPANY) Color.White else MaterialTheme.typography.bodyMedium.color
-                    )
-                }
-            }
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text("Joined Before?", style = MaterialTheme.typography.bodyMedium)
-                Button(
-                    text = "Login",
-                    onClick = { navController.navigate(Screen.Login.route) },
-                    textButton = true,
+                Text(
+                    "What describes you the best?",
+                    style = MaterialTheme.typography.headlineLarge,
+                    textAlign = TextAlign.Center
                 )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.7f),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .weight(personBoxWeight)
+                            .fillMaxHeight(personBoxHeight)
+                            .clip(RoundedCornerShape(Spacing.l))
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = if (accountType.value == AccountType.PERSON) listOf(
+                                        Color.Magenta.copy(alpha = 0.02f),
+                                        Color.Magenta.copy(alpha = 0.05f),
+                                    ) else listOf(
+                                        Color.Transparent,
+                                        Color.Transparent
+                                    )
+                                )
+                            )
+                            .border(
+                                BorderStroke(
+                                    1.dp,
+                                    if (accountType.value == AccountType.PERSON) Color.Magenta.copy(
+                                        alpha = 0.2f
+                                    ) else borderColor
+                                ),
+                                shape = RoundedCornerShape(Spacing.l)
+                            )
+                            .clickable { accountType.value = AccountType.PERSON }
+                            .padding(Spacing.m),
+                        verticalArrangement = Arrangement.Bottom
+                    ) {
+                        Text(
+                            "Person",
+                            modifier = Modifier.padding(bottom = Spacing.m),
+                            fontSize = MaterialTheme.typography.headlineMedium.fontSize,
+                            color = if (accountType.value == AccountType.PERSON) Color.White else MaterialTheme.typography.headlineMedium.color
+                        )
+                        Text(
+                            "Discover Bars, Parties & Night Clubs or arrange your own party.",
+                            modifier = Modifier.padding(bottom = Spacing.m),
+                            fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                            color = if (accountType.value == AccountType.PERSON) Color.White else MaterialTheme.typography.bodyMedium.color
+                        )
+                    }
+                    Spacer(modifier = Modifier.fillMaxWidth(0.05f))
+                    Column(
+                        modifier = Modifier
+                            .weight(companyBoxWeight)
+                            .fillMaxHeight(companyBoxHeight)
+                            .clip(RoundedCornerShape(Spacing.l))
+                            .background(
+                                Brush.verticalGradient(
+                                    colors = if (accountType.value == AccountType.COMPANY) listOf(
+                                        Color.Blue.copy(alpha = 0.02f),
+                                        Color.Blue.copy(alpha = 0.05f),
+                                    ) else listOf(
+                                        Color.Transparent,
+                                        Color.Transparent
+                                    )
+                                )
+                            )
+                            .border(
+                                BorderStroke(
+                                    1.dp,
+                                    if (accountType.value == AccountType.COMPANY) primaryDark else borderColor
+                                ),
+                                shape = RoundedCornerShape(Spacing.l)
+                            )
+                            .clickable { accountType.value = AccountType.COMPANY }
+                            .padding(Spacing.m),
+                        verticalArrangement = Arrangement.Bottom
+                    ) {
+                        Text(
+                            "Bar or Night Club",
+                            modifier = Modifier.padding(bottom = Spacing.m),
+                            fontSize = MaterialTheme.typography.headlineMedium.fontSize,
+                            color = if (accountType.value == AccountType.COMPANY) Color.White else MaterialTheme.typography.headlineMedium.color
+                        )
+                        Text(
+                            "Coming soon...",
+                            modifier = Modifier.padding(bottom = Spacing.m),
+                            fontSize = MaterialTheme.typography.bodyMedium.fontSize,
+                            color = if (accountType.value == AccountType.COMPANY) Color.White else MaterialTheme.typography.bodyMedium.color
+                        )
+                    }
+                }
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center,
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text("Joined Before?", style = MaterialTheme.typography.bodyMedium)
+                    Button(
+                        text = "Login",
+                        onClick = { navController.navigate(Screen.Login.route) },
+                        textButton = true,
+                    )
+                }
             }
         }
-
     }
 }

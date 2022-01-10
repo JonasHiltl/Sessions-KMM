@@ -21,6 +21,9 @@ object DarkColors {
     val successNotificationBorder = Color(0xFF235129)
     val disableButtonBG = Color(256, 256, 256, 10)
     val disableButtonBorder = Color(256, 256, 256, 25)
+    val backgroundPurple = Color(0xFF9362EE)
+    val backgroundBlue = Color(0xFF161C96)
+    val backgroundLightBlue = Color(0xFF474ECA)
 }
 
 object LightColors {
@@ -33,4 +36,7 @@ object LightColors {
     val successNotificationBorder = Color(0xFFBBE0C2)
     val disableButtonBG = Color(48, 55, 121, 25)
     val disableButtonBorder = Color(0xFFD9D9D9)
+    val backgroundPurple = Color(0xFF7456C9)
+    val backgroundBlue = Color(0xFF474ECC)
+    val backgroundLightBlue = Color(0xFF676FFF)
 }

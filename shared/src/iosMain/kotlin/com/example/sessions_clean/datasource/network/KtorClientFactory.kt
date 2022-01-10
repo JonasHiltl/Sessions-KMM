@@ -4,16 +4,15 @@ import com.example.sessions_clean.domain.util.Constants
 import com.example.sessions_clean.domain.util.settings
 import io.ktor.client.*
 import io.ktor.client.engine.ios.*
-import io.ktor.client.features.auth.*
-import io.ktor.client.features.auth.providers.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
-import kotlinx.serialization.json.Json
+import io.ktor.client.request.*
 
 actual class KtorClientFactory {
-    actual fun build(): HttpClient {
-        return HttpClient(Ios) {
+    actual fun build(token: String): HttpClient {
+        val client = HttpClient(Ios) {
+            developmentMode = true
             install(Logging)
             install(JsonFeature) {
                 serializer = KotlinxSerializer(
@@ -22,16 +21,13 @@ actual class KtorClientFactory {
                     }
                 )
             }
-            install(Auth) {
-                bearer {
-                    loadTokens {
-                        BearerTokens(
-                            accessToken = settings.getString(Constants.AUTH_TOKEN),
-                            refreshToken = ""
-                        )
-                    }
-                }
-            }
         }
+
+        client.sendPipeline.intercept(HttpSendPipeline.State) {
+            val accessToken = if(token.isBlank()) settings.getString(Constants.AUTH_TOKEN) else token
+            context.headers.append("Authorization", "Bearer $accessToken")
+        }
+
+        return client
     }
 }

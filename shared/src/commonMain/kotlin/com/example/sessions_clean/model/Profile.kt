@@ -6,7 +6,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Profile(
     @SerialName("id")
-    var id: Int,
+    var id: String,
 
     @SerialName("username")
     var username: String,
@@ -18,8 +18,8 @@ data class Profile(
     var lastname: String?,
 
     @SerialName("phone")
-    var phone: String?,
+    var phone: String? = null,
 
     @SerialName("picture")
-    var picture: String?,
+    var picture: String? = null,
 )
