@@ -4,6 +4,9 @@ object Deps {
             "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}"
         const val navigationMaterial =
             "com.google.accompanist:accompanist-navigation-material:${Versions.accompanist}"
+        const val systemUiController =
+            "com.google.accompanist:accompanist-systemuicontroller:${Versions.accompanist}"
+        const val insets = "com.google.accompanist:accompanist-insets:${Versions.accompanist}"
     }
 
     object Android {

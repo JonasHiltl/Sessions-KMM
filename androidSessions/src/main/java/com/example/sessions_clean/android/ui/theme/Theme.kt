@@ -6,8 +6,10 @@ import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val lightColorTheme = lightColorScheme(
     primary = primaryDark,
@@ -22,19 +24,6 @@ private val darkColorTheme = darkColorScheme(
     surface = DarkColors.surface,
     error = errorColor
 )
-
-@Composable
-fun M3Theme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable () -> Unit,
-) {
-    CompositionLocalProvider(LocalDarkMode provides darkTheme) {
-        MaterialTheme(
-            colorScheme = if (darkTheme == true) darkColorTheme else lightColorTheme,
-            content = content
-        )
-    }
-}
 
 val LocalDarkMode = compositionLocalOf<Boolean> {
     error("No context provided")
@@ -80,4 +69,34 @@ object ExtendedTheme {
     val backgroundLightBlue: Color
         @Composable
         get() = if (LocalDarkMode.current) DarkColors.backgroundLightBlue else LightColors.backgroundLightBlue
+}
+
+@Composable
+fun M3Theme(
+    darkTheme: Boolean = isSystemInDarkTheme(),
+    content: @Composable () -> Unit,
+) {
+    val systemUiController = rememberSystemUiController()
+
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color = Color.Transparent,
+            darkIcons = !darkTheme
+        )
+        systemUiController.setSystemBarsColor(
+            color = Color.Transparent,
+            darkIcons = !darkTheme
+        )
+        systemUiController.setSystemBarsColor(
+            color = Color.Transparent,
+            darkIcons = !darkTheme
+        )
+    }
+
+    CompositionLocalProvider(LocalDarkMode provides darkTheme) {
+        MaterialTheme(
+            colorScheme = if (darkTheme) darkColorTheme else lightColorTheme,
+            content = content
+        )
+    }
 }

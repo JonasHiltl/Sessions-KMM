@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.example.sessions_clean.android.localNavController
+import com.example.sessions_clean.android.ui.components.StatusBarInset
 import com.example.sessions_clean.android.ui.components.backgrounds.Background2
 import com.example.sessions_clean.android.ui.theme.Spacing
 
@@ -22,21 +23,23 @@ fun ProfileScreen() {
 
     Scaffold {
         Background2()
-        Row(
-            Modifier
-                .fillMaxWidth()
-                .padding(horizontal = Spacing.m, vertical = Spacing.s),
-            horizontalArrangement = Arrangement.SpaceBetween
-        ) {
-            IconButton(onClick = {
-                navController.popBackStack()
-            }) {
-                Icon(
-                    Icons.Rounded.Close,
-                    modifier = Modifier.size(30.dp),
-                    contentDescription = "Close Profile screen",
-                    tint = MaterialTheme.colorScheme.onBackground
-                )
+        StatusBarInset {
+            Row(
+                Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = Spacing.m, vertical = Spacing.s),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                IconButton(onClick = {
+                    navController.popBackStack()
+                }) {
+                    Icon(
+                        Icons.Rounded.Close,
+                        modifier = Modifier.size(30.dp),
+                        contentDescription = "Close Profile screen",
+                        tint = MaterialTheme.colorScheme.onBackground
+                    )
+                }
             }
         }
     }

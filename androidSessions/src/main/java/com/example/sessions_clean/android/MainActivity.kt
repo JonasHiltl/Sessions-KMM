@@ -6,6 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -14,6 +17,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.core.view.WindowCompat
 import androidx.navigation.NavHostController
 import com.example.sessions_clean.android.di.appModule
 import com.example.sessions_clean.android.di.interactorsModule
@@ -25,6 +29,8 @@ import com.example.sessions_clean.android.ui.providers.AuthStateController
 import com.example.sessions_clean.android.ui.providers.LocalAuthState
 import com.example.sessions_clean.android.ui.theme.M3Theme
 import com.example.sessions_clean.android.ui.theme.Spacing
+import com.google.accompanist.insets.ProvideWindowInsets
+import com.google.accompanist.insets.statusBarsHeight
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
@@ -57,26 +63,30 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
             val bottomSheetNavigator = rememberBottomSheetNavigator()
             val navController = rememberAnimatedNavController(bottomSheetNavigator)
 
-            CompositionLocalProvider(
-                localNavController provides navController,
-                LocalAuthState provides authStateController.state.value
-            ) {
-                M3Theme(darkTheme = true) {
-                    NotificationQueue(get()) {
-                        ModalBottomSheetLayout(
-                            bottomSheetNavigator,
-                            modifier = Modifier.background(MaterialTheme.colorScheme.background),
-                            sheetShape = RoundedCornerShape(
-                                topStart = Spacing.l,
-                                topEnd = Spacing.l
-                            ),
-                            sheetBackgroundColor = MaterialTheme.colorScheme.background,
-                        ) {
-                            SetupNavGraph()
+            ProvideWindowInsets() {
+                CompositionLocalProvider(
+                    localNavController provides navController,
+                    LocalAuthState provides authStateController.state.value
+                ) {
+                    M3Theme(darkTheme = true) {
+                        NotificationQueue(get()) {
+                            ModalBottomSheetLayout(
+                                bottomSheetNavigator,
+                                modifier = Modifier.background(MaterialTheme.colorScheme.background),
+                                sheetShape = RoundedCornerShape(
+                                    topStart = Spacing.l,
+                                    topEnd = Spacing.l
+                                ),
+                                sheetBackgroundColor = MaterialTheme.colorScheme.background,
+                            ) {
+                                SetupNavGraph()
+                            }
                         }
                     }
                 }

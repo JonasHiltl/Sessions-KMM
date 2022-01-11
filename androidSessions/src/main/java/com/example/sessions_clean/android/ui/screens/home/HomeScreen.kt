@@ -15,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.dp
 import com.example.sessions_clean.android.localNavController
+import com.example.sessions_clean.android.ui.components.StatusBarInset
 import com.example.sessions_clean.android.ui.navigation.Screen
 import com.example.sessions_clean.android.ui.theme.Spacing
 import kotlinx.coroutines.launch
@@ -49,27 +50,29 @@ fun HomeScreen() {
     ) {
         androidx.compose.material3.Scaffold(
             topBar = {
-                Row(
-                    Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = Spacing.m, vertical = Spacing.s),
-                    horizontalArrangement = Arrangement.SpaceBetween
-                ) {
-                    IconButton(onClick = { navController.navigate(Screen.Profile.route) }) {
-                        Icon(
-                            Icons.Rounded.Menu,
-                            modifier = Modifier.size(30.dp),
-                            contentDescription = "Menu",
-                            tint = MaterialTheme.colorScheme.onBackground
-                        )
-                    }
-                    IconButton(onClick = { }) {
-                        Icon(
-                            Icons.Rounded.Search,
-                            modifier = Modifier.size(30.dp),
-                            contentDescription = "Menu",
-                            tint = MaterialTheme.colorScheme.onBackground
-                        )
+                StatusBarInset {
+                    Row(
+                        Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = Spacing.m, vertical = Spacing.s),
+                        horizontalArrangement = Arrangement.SpaceBetween
+                    ) {
+                        IconButton(onClick = { navController.navigate(Screen.Profile.route) }) {
+                            Icon(
+                                Icons.Rounded.Menu,
+                                modifier = Modifier.size(30.dp),
+                                contentDescription = "Menu",
+                                tint = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
+                        IconButton(onClick = { }) {
+                            Icon(
+                                Icons.Rounded.Search,
+                                modifier = Modifier.size(30.dp),
+                                contentDescription = "Menu",
+                                tint = MaterialTheme.colorScheme.onBackground
+                            )
+                        }
                     }
                 }
             }
@@ -88,6 +91,5 @@ fun HomeScreen() {
                 Text("Toggle Sheet")
             }
         }
-
     }
 }
