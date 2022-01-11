@@ -29,4 +29,6 @@ object Versions {
     const val dataStore = "1.0.0"
 
     const val camera = "1.0.2"
+
+    const val mapbox = "10.2.0"
 }

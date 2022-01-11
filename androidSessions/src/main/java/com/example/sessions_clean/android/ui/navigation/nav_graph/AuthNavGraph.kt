@@ -19,15 +19,10 @@ import com.example.sessions_clean.android.ui.screens.auth.login.LoginScreen
 import com.example.sessions_clean.android.ui.screens.auth.login.LoginViewModel
 import com.example.sessions_clean.android.ui.screens.auth.person.RegisterScreen
 import com.example.sessions_clean.android.ui.screens.auth.person.RegisterViewModel
+import com.example.sessions_clean.android.ui.theme.Constants
 import com.google.accompanist.navigation.animation.composable
 import org.koin.androidx.compose.getViewModel
 
-const val transitionLength = 300
-val slideTransitionSpec: FiniteAnimationSpec<IntOffset> =
-    tween(transitionLength, easing = FastOutSlowInEasing)
-
-val fadeTransitionSpec: FiniteAnimationSpec<Float> =
-    tween(transitionLength, easing = FastOutSlowInEasing)
 
 @ExperimentalMaterial3Api
 @ExperimentalFoundationApi
@@ -54,9 +49,9 @@ fun NavGraphBuilder.authNavGraph() {
             Screen.Register.route,
             enterTransition = {
                 slideInHorizontally(
-                    initialOffsetX = { -transitionLength },
-                    animationSpec = slideTransitionSpec
-                ) + fadeIn(fadeTransitionSpec)
+                    initialOffsetX = { -Constants.transitionLength },
+                    animationSpec = Constants.slideTransitionSpec
+                ) + fadeIn(Constants.fadeTransitionSpec)
             },
             exitTransition = { ExitTransition.None }
         ) {
@@ -70,12 +65,12 @@ fun NavGraphBuilder.authNavGraph() {
             Screen.AccountSelection.route,
             enterTransition = {
                 slideInVertically(
-                    initialOffsetY = { transitionLength },
-                    animationSpec = slideTransitionSpec
-                ) + fadeIn(fadeTransitionSpec)
+                    initialOffsetY = { Constants.transitionLength },
+                    animationSpec = Constants.slideTransitionSpec
+                ) + fadeIn(Constants.fadeTransitionSpec)
             },
             exitTransition = {
-                fadeOut(fadeTransitionSpec)
+                fadeOut(Constants.fadeTransitionSpec)
             }
         ) {
             AccountSelectionScreen()
@@ -84,9 +79,9 @@ fun NavGraphBuilder.authNavGraph() {
             Screen.RegisterCompany.route,
             enterTransition = {
                 slideInHorizontally(
-                    initialOffsetX = { transitionLength },
-                    animationSpec = slideTransitionSpec
-                ) + fadeIn(fadeTransitionSpec)
+                    initialOffsetX = { Constants.transitionLength },
+                    animationSpec = Constants.slideTransitionSpec
+                ) + fadeIn(Constants.fadeTransitionSpec)
             },
             exitTransition = { ExitTransition.None }
         ) {

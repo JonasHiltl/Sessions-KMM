@@ -28,9 +28,9 @@ class GetMeInterceptor(
         } catch (e: ClientRequestException) {
             println("Get Me Interceptor error response")
             println(e)
-            if (e.response.status === HttpStatusCode.Unauthorized) {
+            if (e.response.status == HttpStatusCode.Unauthorized) {
                 emit(
-                    DataState.error<Profile>(
+                    DataState.error(
                         message = GenericNotification.Builder()
                             .message("Jwt is missing")
                             .variant(NotificationVariant.ERROR),
@@ -38,9 +38,8 @@ class GetMeInterceptor(
                 )
             } else {
                 val res = e.response.readText()
-
                 emit(
-                    DataState.error<Profile>(
+                    DataState.error(
                         message = GenericNotification.Builder()
                             .message(errorRes = res)
                             .variant(NotificationVariant.ERROR),
@@ -51,7 +50,7 @@ class GetMeInterceptor(
             println("Get me Interceptor Exception")
             println(e)
             emit(
-                DataState.error<Profile>(
+                DataState.error(
                     message = GenericNotification.Builder()
                         .message("Unrecognized Error")
                         .variant(NotificationVariant.ERROR),

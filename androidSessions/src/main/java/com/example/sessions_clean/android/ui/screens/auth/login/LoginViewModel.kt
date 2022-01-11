@@ -45,12 +45,16 @@ class LoginViewModel(
                 notificationQueueState.addNotification(it)
             }
 
+            if (datastate.isLoading) {
+                state.value = state.value.copy(isLoading = true)
+            }
+
             if (datastate.data != null) {
                 authStateController.fetchMe()
             }
 
-            datastate.isLoading.let {
-                state.value = state.value.copy(isLoading = it)
+            if (datastate.isError) {
+                state.value = state.value.copy(isLoading = false)
             }
         }
     }

@@ -43,7 +43,7 @@ class RegisterInteractor(
                 )
             )
         } catch (e: ClientRequestException) {
-            if (e.response.status === HttpStatusCode.Unauthorized) {
+            if (e.response.status == HttpStatusCode.Unauthorized) {
                 emit(
                     DataState.error<RegisterRes>(
                         message = GenericNotification.Builder()

@@ -63,6 +63,10 @@ object Deps {
         const val clientLogging = "io.ktor:ktor-client-logging:${Versions.ktor}"
     }
 
+    object Mapbox {
+        const val core = "com.mapbox.maps:android:${Versions.mapbox}"
+    }
+
     object Settings {
         const val core = "com.russhwolf:multiplatform-settings:${Versions.settings}"
         const val noArgs = "com.russhwolf:multiplatform-settings-no-arg:${Versions.settings}"

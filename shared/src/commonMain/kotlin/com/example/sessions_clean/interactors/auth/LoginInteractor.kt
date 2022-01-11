@@ -37,7 +37,7 @@ class LoginInteractor(
                 )
             )
         } catch (e: ClientRequestException) {
-            if (e.response.status === HttpStatusCode.Unauthorized) {
+            if (e.response.status == HttpStatusCode.Unauthorized) {
                 emit(
                     DataState.error<LoginRes>(
                         message = GenericNotification.Builder()
