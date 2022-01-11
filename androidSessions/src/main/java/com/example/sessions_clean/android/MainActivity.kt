@@ -27,6 +27,7 @@ import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.google.accompanist.navigation.material.ExperimentalMaterialNavigationApi
 import com.google.accompanist.navigation.material.ModalBottomSheetLayout
 import com.google.accompanist.navigation.material.rememberBottomSheetNavigator
+import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.androidx.compose.get
@@ -44,16 +45,14 @@ val localNavController = compositionLocalOf<NavHostController> {
 @ExperimentalMaterialNavigationApi
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
+        val authStateController: AuthStateController by inject()
+
         super.onCreate(savedInstanceState)
 
-        startKoin {
-            androidLogger(if (BuildConfig.DEBUG) Level.ERROR else Level.NONE)
-            androidContext(this@MainActivity)
-            modules(listOf(appModule, networkModule, viewModelModule, interactorsModule))
-        }
-
         installSplashScreen().apply {
-
+            setKeepVisibleCondition {
+                authStateController.state.value.isLoading
+            }
         }
 
         setContent {
@@ -62,7 +61,7 @@ class MainActivity : ComponentActivity() {
 
             CompositionLocalProvider(
                 localNavController provides navController,
-                LocalAuthState provides get<AuthStateController>().state.value
+                LocalAuthState provides authStateController.state.value
             ) {
                 M3Theme(darkTheme = true) {
                     NotificationQueue(get()) {

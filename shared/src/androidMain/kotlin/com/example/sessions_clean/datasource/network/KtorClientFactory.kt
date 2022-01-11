@@ -12,6 +12,7 @@ import io.ktor.client.request.*
 
 actual class KtorClientFactory {
     actual fun build(token: String): HttpClient {
+        if (token.isNotBlank()) println("Got stored token $token")
         val client = HttpClient(Android) {
             developmentMode = true
             install(Logging)

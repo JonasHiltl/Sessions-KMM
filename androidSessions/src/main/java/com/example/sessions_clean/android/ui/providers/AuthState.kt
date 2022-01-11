@@ -20,13 +20,13 @@ class AuthStateController(
     }
 
     fun fetchMe() {
-        val me = getMeInterceptor.execute().collect(CoroutineScope(Dispatchers.IO)) { dataState ->
+        val me = getMeInterceptor.execute().collect(CoroutineScope(Dispatchers.Main)) { dataState ->
             dataState.data?.let {
                 state.value =
                     state.value.copy(profile = it, isAuthenticated = true, isLoading = false)
             }
             dataState.isError.let {
-                state.value = state.value.copy(isAuthenticated = false, isLoading = false)
+                if (it) state.value = state.value.copy(isAuthenticated = false, isLoading = false)
             }
         }
     }

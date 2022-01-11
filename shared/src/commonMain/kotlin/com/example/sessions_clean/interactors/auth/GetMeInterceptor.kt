@@ -26,6 +26,7 @@ class GetMeInterceptor(
                 )
             )
         } catch (e: ClientRequestException) {
+            println("Get Me Interceptor error response")
             println(e)
             if (e.response.status === HttpStatusCode.Unauthorized) {
                 emit(
@@ -47,6 +48,7 @@ class GetMeInterceptor(
                 )
             }
         } catch (e: Exception) {
+            println("Get me Interceptor Exception")
             println(e)
             emit(
                 DataState.error<Profile>(
