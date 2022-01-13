@@ -1,4 +1,4 @@
-package com.example.sessions_clean.android.ui.theme
+package com.example.sessions_clean.android.helpers
 
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.FiniteAnimationSpec
@@ -13,4 +13,5 @@ object Constants {
     val fadeTransitionSpec: FiniteAnimationSpec<Float> =
         tween(transitionLength, easing = FastOutSlowInEasing)
 
+    const val AUTH_NAV_GRAPH = "auth"
 }

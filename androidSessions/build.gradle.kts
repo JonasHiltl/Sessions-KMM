@@ -1,6 +1,19 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("kotlin-parcelize")
+    id("com.google.devtools.ksp") version "1.6.10-1.0.2"
+}
+
+kotlin {
+    sourceSets {
+        debug {
+            kotlin.srcDir("build/generated/ksp/debug/kotlin")
+        }
+        release {
+            kotlin.srcDir("build/generated/ksp/release/kotlin")
+        }
+    }
 }
 
 android {
@@ -36,8 +49,6 @@ dependencies {
     implementation(project(":shared"))
 
     with(Deps.Accompanist) {
-        implementation(navigationAnimation)
-        implementation(navigationMaterial)
         implementation(systemUiController)
         implementation(insets)
     }
@@ -61,9 +72,13 @@ dependencies {
         implementation(uiTooling)
         implementation(foundationLayout)
         implementation(material3)
-        implementation(navigation)
         implementation(icons)
         implementation(iconsExtended)
+    }
+
+    with (Deps.ComposeDestinations) {
+        implementation(core)
+        ksp(kspPlugin)
     }
 
     with(Deps.Google) {
@@ -78,6 +93,10 @@ dependencies {
 
     with(Deps.Ktor) {
         implementation(clientAndroid)
+    }
+
+    with(Deps.Mapbox) {
+        implementation(core)
     }
 
     with(Deps.Settings) {

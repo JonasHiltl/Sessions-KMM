@@ -1,9 +1,5 @@
 object Deps {
     object Accompanist {
-        const val navigationAnimation =
-            "com.google.accompanist:accompanist-navigation-animation:${Versions.accompanist}"
-        const val navigationMaterial =
-            "com.google.accompanist:accompanist-navigation-material:${Versions.accompanist}"
         const val systemUiController =
             "com.google.accompanist:accompanist-systemuicontroller:${Versions.accompanist}"
         const val insets = "com.google.accompanist:accompanist-insets:${Versions.accompanist}"
@@ -36,10 +32,14 @@ object Deps {
         const val foundationLayout =
             "androidx.compose.foundation:foundation-layout:${Versions.compose}"
         const val material3 = "androidx.compose.material3:material3:${Versions.material3}"
-        const val navigation = "androidx.navigation:navigation-compose:${Versions.navCompose}"
         const val icons = "androidx.compose.material:material-icons-core:${Versions.compose}"
         const val iconsExtended =
             "androidx.compose.material:material-icons-extended:${Versions.compose}"
+    }
+
+    object ComposeDestinations {
+        const val core = "io.github.raamcosta.compose-destinations:animations-core:${Versions.composeDestinations}"
+        const val kspPlugin = "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
     }
 
     object Google {

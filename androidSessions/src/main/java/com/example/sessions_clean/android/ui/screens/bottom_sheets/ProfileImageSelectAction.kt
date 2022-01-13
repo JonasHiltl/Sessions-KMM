@@ -18,7 +18,10 @@ import androidx.compose.ui.graphics.Color
 import com.example.sessions_clean.android.ui.components.Button
 import com.example.sessions_clean.android.ui.theme.ExtendedTheme
 import com.example.sessions_clean.android.ui.theme.Spacing
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.spec.DestinationStyle
 
+@Destination(style = DestinationStyle.BottomSheet::class)
 @Composable
 fun ProfileImageSelectAction() {
     Column() {

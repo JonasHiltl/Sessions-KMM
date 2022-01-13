@@ -31,4 +31,6 @@ object Versions {
     const val camera = "1.0.2"
 
     const val mapbox = "10.2.0"
+
+    const val composeDestinations = "1.1.3-beta"
 }

@@ -1,12 +1,15 @@
 package com.example.sessions_clean.android.ui.screens.auth.login
 
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -16,22 +19,30 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.sessions_clean.android.localNavController
+import com.example.sessions_clean.android.helpers.Constants
 import com.example.sessions_clean.android.ui.components.Button
 import com.example.sessions_clean.android.ui.components.CustomTextField
-import com.example.sessions_clean.android.ui.navigation.Screen
+import com.example.sessions_clean.android.ui.annimations.NoTransition
+import com.example.sessions_clean.android.ui.screens.destinations.AccountSelectionScreenDestination
 import com.example.sessions_clean.android.ui.theme.Spacing
 import com.example.sessions_clean.presentation.auth.login.LoginEvents
-import com.example.sessions_clean.presentation.auth.login.LoginState
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import org.koin.androidx.compose.get
 
-@ExperimentalMaterial3Api
+@OptIn(
+    ExperimentalAnimationApi::class,
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterialApi::class,
+    ExperimentalFoundationApi::class
+)
+@Destination(navGraph = Constants.AUTH_NAV_GRAPH, style = NoTransition::class)
 @Composable
 fun LoginScreen(
-    state: LoginState,
-    onTriggerEvent: (LoginEvents) -> Unit
+    navigator: DestinationsNavigator,
+    viewModel: LoginViewModel = get(),
 ) {
-    val navController = localNavController.current
-
+    val state = viewModel.state.value
     Scaffold() {
         Column(
             modifier = Modifier
@@ -72,7 +83,13 @@ fun LoginScreen(
                     )
                     CustomTextField(
                         value = state.usernameOrEmail,
-                        onValueChange = { onTriggerEvent(LoginEvents.OnUpdateUsernameOrEmail(it)) },
+                        onValueChange = {
+                            viewModel.onTriggerEvent(
+                                LoginEvents.OnUpdateUsernameOrEmail(
+                                    it
+                                )
+                            )
+                        },
                         placeholder = "Username or Email",
                         expand = true,
                         modifier = Modifier.padding(bottom = Spacing.m),
@@ -80,7 +97,13 @@ fun LoginScreen(
                     )
                     CustomTextField(
                         value = state.password,
-                        onValueChange = { onTriggerEvent(LoginEvents.OnUpdatePassword(it)) },
+                        onValueChange = {
+                            viewModel.onTriggerEvent(
+                                LoginEvents.OnUpdatePassword(
+                                    it
+                                )
+                            )
+                        },
                         placeholder = "Password",
                         expand = true,
                         isPasswordField = true,
@@ -89,7 +112,7 @@ fun LoginScreen(
                 Column() {
                     Button(
                         text = "Login",
-                        onClick = { onTriggerEvent(LoginEvents.Login) },
+                        onClick = { viewModel.onTriggerEvent(LoginEvents.Login) },
                         isLoading = state.isLoading,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -104,7 +127,7 @@ fun LoginScreen(
                         Button(
                             text = "Register",
                             onClick = {
-                                navController.navigate(Screen.AccountSelection.route)
+                                navigator.navigate(AccountSelectionScreenDestination)
                             },
                             textButton = true
                         )

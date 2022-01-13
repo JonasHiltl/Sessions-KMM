@@ -3,12 +3,10 @@ package com.example.sessions_clean.android.ui.screens.auth
 import androidx.compose.animation.Crossfade
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.*
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBackIos
 import androidx.compose.material.icons.filled.ArrowForwardIos
@@ -24,12 +22,17 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.example.sessions_clean.android.localNavController
+import com.example.sessions_clean.android.helpers.Constants
 import com.example.sessions_clean.android.ui.components.Button
 import com.example.sessions_clean.android.ui.components.StatusBarInset
 import com.example.sessions_clean.android.ui.components.backgrounds.Background1
-import com.example.sessions_clean.android.ui.navigation.Screen
+import com.example.sessions_clean.android.ui.annimations.SlideFromBottomTransition
+import com.example.sessions_clean.android.ui.screens.destinations.LoginScreenDestination
+import com.example.sessions_clean.android.ui.screens.destinations.RegisterCompanyScreenDestination
+import com.example.sessions_clean.android.ui.screens.destinations.RegisterScreenDestination
 import com.example.sessions_clean.android.ui.theme.*
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
 private enum class AccountType {
     PERSON, COMPANY
@@ -40,12 +43,21 @@ private val animationSpec: FiniteAnimationSpec<Float> = tween(
     easing = FastOutSlowInEasing
 )
 
-@ExperimentalMaterial3Api
-@ExperimentalAnimationApi
+@OptIn(
+    ExperimentalAnimationApi::class,
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterialApi::class,
+    ExperimentalFoundationApi::class
+)
+@Destination(
+    navGraph = Constants.AUTH_NAV_GRAPH,
+    start = true,
+    style = SlideFromBottomTransition::class
+)
 @Composable
-fun AccountSelectionScreen() {
-    val navController = localNavController.current
-
+fun AccountSelectionScreen(
+    navigator: DestinationsNavigator
+) {
     val borderColor = MaterialTheme.colorScheme.onBackground.copy(
         alpha = 0.1f
     )
@@ -117,7 +129,11 @@ fun AccountSelectionScreen() {
                                     .fillMaxWidth(),
                                 horizontalArrangement = Arrangement.End
                             ) {
-                                IconButton(onClick = { navController.navigate(Screen.RegisterCompany.route) }) {
+                                IconButton(onClick = {
+                                    navigator.navigate(
+                                        RegisterCompanyScreenDestination
+                                    )
+                                }) {
                                     Icon(
                                         Icons.Filled.ArrowForwardIos,
                                         contentDescription = "Navigate to registration as company",
@@ -131,7 +147,7 @@ fun AccountSelectionScreen() {
                                     .fillMaxWidth(),
                                 horizontalArrangement = Arrangement.Start
                             ) {
-                                IconButton(onClick = { navController.navigate(Screen.Register.route) }) {
+                                IconButton(onClick = { navigator.navigate(RegisterScreenDestination) }) {
                                     Icon(
                                         Icons.Filled.ArrowBackIos,
                                         contentDescription = "Navigate to registration as person",
@@ -248,7 +264,7 @@ fun AccountSelectionScreen() {
                         Text("Joined Before?", style = MaterialTheme.typography.bodyMedium)
                         Button(
                             text = "Login",
-                            onClick = { navController.navigate(Screen.Login.route) },
+                            onClick = { navigator.navigate(LoginScreenDestination) },
                             textButton = true,
                         )
                     }

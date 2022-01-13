@@ -1,5 +1,6 @@
 package com.example.sessions_clean.android.ui.screens.home.profile
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -11,16 +12,22 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.example.sessions_clean.android.localNavController
 import com.example.sessions_clean.android.ui.components.StatusBarInset
 import com.example.sessions_clean.android.ui.components.backgrounds.Background2
+import com.example.sessions_clean.android.ui.annimations.FadeInOutTransition
 import com.example.sessions_clean.android.ui.theme.Spacing
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 
-@ExperimentalMaterial3Api
+@OptIn(
+    ExperimentalAnimationApi::class,
+    ExperimentalMaterial3Api::class,
+)
+@Destination(style = FadeInOutTransition::class)
 @Composable
-fun ProfileScreen() {
-    val navController = localNavController.current
-
+fun ProfileScreen(
+    navigator: DestinationsNavigator
+) {
     Scaffold {
         Background2()
         StatusBarInset {
@@ -31,7 +38,7 @@ fun ProfileScreen() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 IconButton(onClick = {
-                    navController.popBackStack()
+                    navigator.popBackStack()
                 }) {
                     Icon(
                         Icons.Rounded.Close,

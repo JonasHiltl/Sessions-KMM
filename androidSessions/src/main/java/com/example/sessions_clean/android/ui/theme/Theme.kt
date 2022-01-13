@@ -4,11 +4,13 @@ import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.compositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val lightColorTheme = lightColorScheme(
@@ -18,7 +20,7 @@ private val lightColorTheme = lightColorScheme(
     error = errorColor
 )
 
-private val darkColorTheme = darkColorScheme(
+val darkColorTheme = darkColorScheme(
     primary = primaryDark,
     background = DarkColors.background,
     surface = DarkColors.surface,
@@ -96,6 +98,7 @@ fun M3Theme(
     CompositionLocalProvider(LocalDarkMode provides darkTheme) {
         MaterialTheme(
             colorScheme = if (darkTheme) darkColorTheme else lightColorTheme,
+            typography = if (darkTheme) darkTypography else lightTypography,
             content = content
         )
     }

@@ -9,6 +9,7 @@ import com.example.sessions_clean.android.ui.providers.NotificationQueueState
 import com.example.sessions_clean.interactors.auth.LoginInteractor
 import com.example.sessions_clean.presentation.auth.login.LoginEvents
 import com.example.sessions_clean.presentation.auth.login.LoginState
+import org.koin.androidx.compose.get
 
 class LoginViewModel(
     private val loginInteractor: LoginInteractor,

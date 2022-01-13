@@ -1,44 +1,94 @@
 package com.example.sessions_clean.android.ui.screens.home
 
+import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Menu
-import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.unit.dp
-import com.example.sessions_clean.android.localNavController
 import com.example.sessions_clean.android.ui.components.StatusBarInset
-import com.example.sessions_clean.android.ui.navigation.Screen
+import com.example.sessions_clean.android.ui.annimations.FadeInOutTransition
+import com.example.sessions_clean.android.ui.screens.home.components.AppBar
+import com.example.sessions_clean.android.ui.theme.ExtendedTheme
 import com.example.sessions_clean.android.ui.theme.Spacing
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 import kotlinx.coroutines.launch
 
-@ExperimentalMaterialApi
-@ExperimentalMaterial3Api
+@OptIn(
+    ExperimentalAnimationApi::class,
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterialApi::class,
+)
+@Destination(start = true, style = FadeInOutTransition::class)
 @Composable
-fun HomeScreen() {
-    val navController = localNavController.current
+fun HomeScreen(
+    navigator: DestinationsNavigator
+) {
     val bottomSheetScaffoldState = rememberBottomSheetScaffoldState(
         bottomSheetState = BottomSheetState(BottomSheetValue.Collapsed)
     )
     val coroutineScope = rememberCoroutineScope()
 
+    fun toggleSheet() {
+        coroutineScope.launch {
+            if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
+                bottomSheetScaffoldState.bottomSheetState.expand()
+            } else {
+                bottomSheetScaffoldState.bottomSheetState.collapse()
+            }
+        }
+    }
+
+    fun Modifier.toggleSheet(bottomSheetState: BottomSheetState) = composed(
+        inspectorInfo = debugInspectorInfo {
+            name = "toggleSheetModifier"
+            value = bottomSheetState
+        }, {
+            if (bottomSheetState.isExpanded) {
+                pointerInput(Unit) {
+                    detectTapGestures(onTap = { toggleSheet() })
+                }
+            } else fillMaxHeight()
+        }
+    )
+
     BottomSheetScaffold(
         scaffoldState = bottomSheetScaffoldState,
         sheetContent = {
-            Box(
-                Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(0.9f)
-            ) {
-                Text("Hello from Sheet")
+            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                Box(
+                    Modifier
+                        .padding(Spacing.m)
+                        .width(50.dp)
+                        .height(5.dp)
+                        .clip(CircleShape)
+                        .background(ExtendedTheme.placeHolder)
+                        .pointerInput(Unit) {
+                            detectTapGestures(onTap = { toggleSheet() })
+                        }
+                )
+                Box(
+                    Modifier
+                        .fillMaxWidth()
+                        .fillMaxHeight(0.9f)
+                ) {
+
+                }
             }
         },
         sheetShape = RoundedCornerShape(
@@ -48,47 +98,13 @@ fun HomeScreen() {
         sheetPeekHeight = LocalConfiguration.current.screenHeightDp.dp * 0.15f,
         sheetBackgroundColor = MaterialTheme.colorScheme.surface,
     ) {
-        androidx.compose.material3.Scaffold(
-            topBar = {
-                StatusBarInset {
-                    Row(
-                        Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = Spacing.m, vertical = Spacing.s),
-                        horizontalArrangement = Arrangement.SpaceBetween
-                    ) {
-                        IconButton(onClick = { navController.navigate(Screen.Profile.route) }) {
-                            Icon(
-                                Icons.Rounded.Menu,
-                                modifier = Modifier.size(30.dp),
-                                contentDescription = "Menu",
-                                tint = MaterialTheme.colorScheme.onBackground
-                            )
-                        }
-                        IconButton(onClick = { }) {
-                            Icon(
-                                Icons.Rounded.Search,
-                                modifier = Modifier.size(30.dp),
-                                contentDescription = "Menu",
-                                tint = MaterialTheme.colorScheme.onBackground
-                            )
-                        }
-                    }
-                }
-            }
+        Scaffold(
+            modifier = Modifier.toggleSheet(bottomSheetScaffoldState.bottomSheetState),
         ) {
-            androidx.compose.material3.Button(
-                onClick = {
-                    coroutineScope.launch {
-                        if (bottomSheetScaffoldState.bottomSheetState.isCollapsed) {
-                            bottomSheetScaffoldState.bottomSheetState.expand()
-                        } else {
-                            bottomSheetScaffoldState.bottomSheetState.collapse()
-                        }
-                    }
-                },
-            ) {
-                Text("Toggle Sheet")
+            StatusBarInset {
+                Box {
+                    AppBar()
+                }
             }
         }
     }

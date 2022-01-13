@@ -2,28 +2,25 @@ package com.example.sessions_clean.android.ui.components
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetLayout
-import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.CameraAlt
-import androidx.compose.material.rememberModalBottomSheetState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.example.sessions_clean.android.localNavController
-import com.example.sessions_clean.android.ui.navigation.BottomSheet
+import com.example.sessions_clean.android.ui.screens.destinations.ProfileImageSelectActionDestination
 import com.example.sessions_clean.android.ui.theme.ExtendedTheme
-import kotlinx.coroutines.launch
+import com.ramcosta.composedestinations.navigation.navigateTo
 
 @ExperimentalFoundationApi
 @ExperimentalMaterialApi
@@ -38,8 +35,8 @@ fun ProfileImage() {
             .clip(CircleShape)
             .background(MaterialTheme.colorScheme.surface)
             .combinedClickable(
-                onClick = { navController.navigate(BottomSheet.ProfileImageSelectAction.route) },
-                onLongClick = { navController.navigate(BottomSheet.ProfileImageSelectAction.route) },
+                onClick = { navController.navigateTo(ProfileImageSelectActionDestination) },
+                onLongClick = { navController.navigateTo(ProfileImageSelectActionDestination) },
             ),
         contentAlignment = Alignment.Center
     ) {

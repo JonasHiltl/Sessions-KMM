@@ -22,6 +22,7 @@ class AuthStateController(
     fun fetchMe() {
         val me = getMeInterceptor.execute().collect() { dataState ->
             dataState.data?.let {
+                println("User is authenticated")
                 state.value =
                     state.value.copy(profile = it, isAuthenticated = true, isLoading = false)
             }

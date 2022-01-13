@@ -1,5 +1,6 @@
 package com.example.sessions_clean.android.ui.screens.auth.person
 
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -7,8 +8,8 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,24 +19,31 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
-import com.example.sessions_clean.android.localNavController
+import com.example.sessions_clean.android.helpers.Constants
 import com.example.sessions_clean.android.ui.components.Button
 import com.example.sessions_clean.android.ui.components.CustomTextField
 import com.example.sessions_clean.android.ui.components.ProfileImage
-import com.example.sessions_clean.android.ui.navigation.Screen
+import com.example.sessions_clean.android.ui.annimations.SlideFromLeftTransition
+import com.example.sessions_clean.android.ui.screens.destinations.LoginScreenDestination
 import com.example.sessions_clean.android.ui.theme.Spacing
 import com.example.sessions_clean.presentation.auth.register.RegisterEvents
-import com.example.sessions_clean.presentation.auth.register.RegisterState
+import com.ramcosta.composedestinations.annotation.Destination
+import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import org.koin.androidx.compose.get
 
-@ExperimentalMaterial3Api
-@ExperimentalFoundationApi
-@ExperimentalMaterialApi
+@OptIn(
+    ExperimentalAnimationApi::class,
+    ExperimentalMaterial3Api::class,
+    ExperimentalMaterialApi::class,
+    ExperimentalFoundationApi::class
+)
+@Destination(navGraph = Constants.AUTH_NAV_GRAPH, style = SlideFromLeftTransition::class)
 @Composable
 fun RegisterScreen(
-    state: RegisterState,
-    onTriggerEvent: (RegisterEvents) -> Unit
+    navigator: DestinationsNavigator,
+    viewModel: RegisterViewModel = get()
 ) {
-    val navController = localNavController.current
+    val state = viewModel.state.value
 
     Scaffold() {
         Column(
@@ -78,7 +86,13 @@ fun RegisterScreen(
                     )
                     CustomTextField(
                         value = state.username,
-                        onValueChange = { onTriggerEvent(RegisterEvents.OnUpdateUsername(it)) },
+                        onValueChange = {
+                            viewModel.onTriggerEvent(
+                                RegisterEvents.OnUpdateUsername(
+                                    it
+                                )
+                            )
+                        },
                         placeholder = "Username",
                         expand = true,
                         modifier = Modifier.padding(bottom = Spacing.m),
@@ -86,7 +100,13 @@ fun RegisterScreen(
                     Row() {
                         CustomTextField(
                             value = state.firstname,
-                            onValueChange = { onTriggerEvent(RegisterEvents.OnUpdateFirstname(it)) },
+                            onValueChange = {
+                                viewModel.onTriggerEvent(
+                                    RegisterEvents.OnUpdateFirstname(
+                                        it
+                                    )
+                                )
+                            },
                             placeholder = "First Name",
                             expand = true,
                             modifier = Modifier
@@ -95,7 +115,13 @@ fun RegisterScreen(
                         )
                         CustomTextField(
                             value = state.lastname,
-                            onValueChange = { onTriggerEvent(RegisterEvents.OnUpdateLastname(it)) },
+                            onValueChange = {
+                                viewModel.onTriggerEvent(
+                                    RegisterEvents.OnUpdateLastname(
+                                        it
+                                    )
+                                )
+                            },
                             placeholder = "Last Name",
                             expand = true,
                             modifier = Modifier
@@ -104,7 +130,7 @@ fun RegisterScreen(
                     }
                     CustomTextField(
                         value = state.email,
-                        onValueChange = { onTriggerEvent(RegisterEvents.OnUpdateEmail(it)) },
+                        onValueChange = { viewModel.onTriggerEvent(RegisterEvents.OnUpdateEmail(it)) },
                         placeholder = "Email",
                         expand = true,
                         modifier = Modifier.padding(top = Spacing.m),
@@ -114,7 +140,7 @@ fun RegisterScreen(
                 Column() {
                     Button(
                         text = "Register",
-                        onClick = { onTriggerEvent(RegisterEvents.Register) },
+                        onClick = { viewModel.onTriggerEvent(RegisterEvents.Register) },
                         isLoading = state.isLoading,
                         modifier = Modifier
                             .fillMaxWidth()
@@ -129,7 +155,7 @@ fun RegisterScreen(
                         Button(
                             text = "Login",
                             onClick = {
-                                navController.navigate(Screen.Login.route)
+                                navigator.navigate(LoginScreenDestination)
                             },
                             textButton = true
                         )
