@@ -77,4 +77,11 @@ object Deps {
         const val coroutines =
             "com.russhwolf:multiplatform-settings-coroutines:${Versions.settings}"
     }
+
+    object SQLDelight {
+        const val runtime = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"
+        const val android = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
+        const val native = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
+        const val coroutines = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
+    }
 }

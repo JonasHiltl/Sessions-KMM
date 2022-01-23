@@ -6,6 +6,6 @@ pluginManagement {
     }
 }
 
-rootProject.name = "Sessions-clean"
+rootProject.name = "Sessions"
 include(":androidSessions")
 include(":shared")

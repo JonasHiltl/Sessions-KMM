@@ -19,7 +19,7 @@ kotlin {
 android {
     compileSdk = Versions.androidCompileSdk
     defaultConfig {
-        applicationId = "com.example.sessions_clean.android"
+        applicationId = "com.example.sessions.android"
         minSdk = Versions.androidMinSdk
         targetSdk = Versions.androidTargetSdk
         versionCode = 1

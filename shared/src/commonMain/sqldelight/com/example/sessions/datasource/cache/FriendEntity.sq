@@ -1,0 +1,38 @@
+CREATE TABLE FriendEntity (
+        id INTEGER NOT NULL PRIMARY KEY,
+        username TEXT NOT NULL,
+        firstname TEXT NOT NULL,
+        lastname TEXT,
+        phone TEXT,
+        picture TEXT,
+        accepted INTEGER AS Boolean DEFAULT 0 NOT NULL --   0 means false
+);
+
+getAllFriends:
+SELECT *
+FROM FriendEntity
+LIMIT :pageSize
+OFFSET :offset;
+
+getAllFriendsByAccepted:
+SELECT *
+FROM FriendEntity
+WHERE accepted=:accepted
+LIMIT :pageSize
+OFFSET :offset;
+
+inserFriend:
+INSERT OR REPLACE
+INTO FriendEntity(
+    id,
+    username,
+    firstname,
+    lastname,
+    phone,
+    picture,
+    accepted
+) VALUES (?,?,?,?,?,?,?);
+
+getFriendById:
+SELECT * FROM FriendEntity
+WHERE id = :id;

@@ -1,0 +1,29 @@
+CREATE TABLE ProfileEntity (
+    id INTEGER NOT NULL PRIMARY KEY,
+    username TEXT NOT NULL,
+    firstname TEXT NOT NULL,
+    lastname TEXT,
+    phone TEXT,
+    picture TEXT
+);
+
+getAllProfiles:
+SELECT *
+FROM ProfileEntity
+LIMIT :pageSize
+OFFSET :offset;
+
+insertProfile:
+INSERT OR REPLACE
+INTO ProfileEntity(
+    id,
+    username,
+    firstname,
+    lastname,
+    phone,
+    picture
+) VALUES (?,?,?,?,?,?);
+
+getProfileById:
+SELECT * FROM ProfileEntity
+WHERE id = :id;

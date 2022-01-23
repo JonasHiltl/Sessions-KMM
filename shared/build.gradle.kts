@@ -5,6 +5,7 @@ plugins {
     kotlin("native.cocoapods")
     kotlin("plugin.serialization") version Versions.kotlin
     id("com.android.library")
+    id("com.squareup.sqldelight")
 }
 
 version = "1.0"
@@ -55,6 +56,11 @@ kotlin {
                 with(Deps.Settings) {
                     implementation(noArgs)
                 }
+
+                with(Deps.SQLDelight) {
+                    implementation(runtime)
+                    implementation(coroutines)
+                }
             }
         }
         val commonTest by getting {
@@ -68,6 +74,10 @@ kotlin {
             dependencies {
                 with(Deps.Ktor) {
                     implementation(clientAndroid)
+                }
+
+                with(Deps.SQLDelight) {
+                    implementation(android)
                 }
             }
         }
@@ -83,6 +93,10 @@ kotlin {
             dependencies {
                 with(Deps.Ktor) {
                     implementation(clientIos)
+                }
+
+                with(Deps.SQLDelight) {
+                    implementation(native)
                 }
             }
         }
@@ -108,5 +122,12 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
+
+sqldelight {
+    database("SessionDatabase") {
+        packageName = "com.example.sessions.datasource.cache"
+        sourceFolders = listOf("sqldelight")
     }
 }

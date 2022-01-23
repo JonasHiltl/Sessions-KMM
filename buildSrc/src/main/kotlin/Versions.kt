@@ -24,6 +24,8 @@ object Versions {
 
     const val settings = "0.8.1"
 
+    const val sqlDelight = "1.5.3"
+
     const val coroutines = "1.6.0"
 
     const val dataStore = "1.0.0"
