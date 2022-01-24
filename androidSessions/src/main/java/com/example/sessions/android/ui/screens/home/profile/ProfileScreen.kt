@@ -9,12 +9,17 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.sessions.android.providers.LocalAuthState
 import com.example.sessions.android.ui.components.StatusBarInset
 import com.example.sessions.android.ui.components.backgrounds.Background2
 import com.example.sessions.android.ui.annimations.FadeInOutTransition
+import com.example.sessions.android.ui.components.EditableAvatar
+import com.example.sessions.android.ui.screens.home.profile.components.FriendList
 import com.example.sessions.android.ui.theme.Spacing
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
@@ -28,6 +33,8 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 fun ProfileScreen(
     navigator: DestinationsNavigator
 ) {
+    val me = LocalAuthState.current.profile!!
+
     Scaffold {
         Background2()
         StatusBarInset {
@@ -47,6 +54,15 @@ fun ProfileScreen(
                         tint = MaterialTheme.colorScheme.onBackground
                     )
                 }
+            }
+            Column(
+                Modifier.fillMaxSize(),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                EditableAvatar()
+                Text("${me.firstname} ${me.lastname}", style = MaterialTheme.typography.titleLarge)
+                Text("@${me.username}", style = MaterialTheme.typography.bodyMedium)
+                FriendList()
             }
         }
     }

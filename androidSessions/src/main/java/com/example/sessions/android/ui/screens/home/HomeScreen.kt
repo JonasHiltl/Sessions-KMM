@@ -20,9 +20,11 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.debugInspectorInfo
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.zIndex
 import com.example.sessions.android.ui.components.StatusBarInset
 import com.example.sessions.android.ui.annimations.FadeInOutTransition
 import com.example.sessions.android.ui.screens.home.components.AppBar
+import com.example.sessions.android.ui.screens.home.components.MapboxMap
 import com.example.sessions.android.ui.theme.ExtendedTheme
 import com.example.sessions.android.ui.theme.Spacing
 import com.ramcosta.composedestinations.annotation.Destination
@@ -102,10 +104,11 @@ fun HomeScreen(
             modifier = Modifier.toggleSheet(bottomSheetScaffoldState.bottomSheetState),
         ) {
             StatusBarInset {
-                Box {
+                Box() {
                     AppBar()
                 }
             }
+            //MapboxMap()
         }
     }
 }

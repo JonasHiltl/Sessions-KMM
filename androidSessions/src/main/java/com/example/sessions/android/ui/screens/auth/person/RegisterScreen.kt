@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import com.example.sessions.android.helpers.Constants
 import com.example.sessions.android.ui.components.Button
 import com.example.sessions.android.ui.components.CustomTextField
-import com.example.sessions.android.ui.components.ProfileImage
+import com.example.sessions.android.ui.components.EditableAvatar
 import com.example.sessions.android.ui.annimations.SlideFromLeftTransition
 import com.example.sessions.android.ui.screens.destinations.LoginScreenDestination
 import com.example.sessions.android.ui.theme.Spacing
@@ -65,7 +65,7 @@ fun RegisterScreen(
                     .fillMaxWidth(),
                 contentAlignment = Alignment.Center
             ) {
-                ProfileImage()
+                EditableAvatar()
             }
             Column(
                 modifier = Modifier

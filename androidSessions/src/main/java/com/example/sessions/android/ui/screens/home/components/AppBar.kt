@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
 import com.example.sessions.android.localNavController
 import com.example.sessions.android.ui.screens.destinations.ProfileScreenDestination
+import com.example.sessions.android.ui.screens.destinations.SearchScreenDestination
 import com.example.sessions.android.ui.theme.Spacing
 import com.ramcosta.composedestinations.navigation.navigateTo
 
@@ -41,11 +42,11 @@ fun AppBar() {
                 tint = MaterialTheme.colorScheme.onBackground
             )
         }
-        IconButton(onClick = { }) {
+        IconButton(onClick = { navController.navigateTo(SearchScreenDestination) }) {
             Icon(
                 Icons.Rounded.Search,
                 modifier = Modifier.size(30.dp),
-                contentDescription = "Menu",
+                contentDescription = "Search",
                 tint = MaterialTheme.colorScheme.onBackground
             )
         }

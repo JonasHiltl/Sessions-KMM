@@ -4,6 +4,7 @@ import com.example.sessions.domain.util.Constants
 import com.example.sessions.domain.util.settings
 import io.ktor.client.*
 import io.ktor.client.engine.android.*
+import io.ktor.client.features.*
 import io.ktor.client.features.json.*
 import io.ktor.client.features.json.serializer.*
 import io.ktor.client.features.logging.*
@@ -15,6 +16,9 @@ actual class KtorClientFactory {
         val client = HttpClient(Android) {
             developmentMode = true
             install(Logging)
+            install(HttpTimeout) {
+                requestTimeoutMillis = 1000
+            }
             install(JsonFeature) {
                 serializer = KotlinxSerializer(
                     kotlinx.serialization.json.Json {

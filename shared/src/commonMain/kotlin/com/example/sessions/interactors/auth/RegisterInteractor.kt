@@ -31,8 +31,6 @@ class RegisterInteractor(
 
             settings.putString(Constants.AUTH_TOKEN, registerResDto.token)
 
-            val me = profileService.me()
-
             emit(
                 DataState.data(
                     message = GenericNotification.Builder()

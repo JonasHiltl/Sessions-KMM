@@ -66,6 +66,7 @@ dependencies {
     }
 
     with(Deps.Compose) {
+        implementation(coil)
         implementation(compiler)
         implementation(ui)
         implementation(uiGraphics)
@@ -76,7 +77,7 @@ dependencies {
         implementation(iconsExtended)
     }
 
-    with (Deps.ComposeDestinations) {
+    with(Deps.ComposeDestinations) {
         implementation(core)
         ksp(kspPlugin)
     }

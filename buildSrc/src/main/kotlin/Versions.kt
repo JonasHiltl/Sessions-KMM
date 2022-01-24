@@ -7,7 +7,6 @@ object Versions {
 
     const val compose = "1.1.0-rc01"
     const val composeCompiler = "1.1.0-rc02"
-    const val navCompose = "2.4.0-rc01"
     const val material3 = "1.0.0-alpha02"
 
     const val material = "1.5.0-rc01"
@@ -35,4 +34,6 @@ object Versions {
     const val mapbox = "10.2.0"
 
     const val composeDestinations = "1.1.3-beta"
+
+    const val coil = "1.4.0"
 }

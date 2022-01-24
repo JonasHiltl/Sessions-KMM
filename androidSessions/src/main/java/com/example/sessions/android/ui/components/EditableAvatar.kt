@@ -22,15 +22,17 @@ import com.example.sessions.android.ui.screens.destinations.ProfileImageSelectAc
 import com.example.sessions.android.ui.theme.ExtendedTheme
 import com.ramcosta.composedestinations.navigation.navigateTo
 
-@ExperimentalFoundationApi
-@ExperimentalMaterialApi
+@OptIn(
+    ExperimentalFoundationApi::class,
+    ExperimentalMaterialApi::class,
+)
 @Composable
-fun ProfileImage() {
+fun EditableAvatar() {
     val navController = localNavController.current
 
     Box(
         modifier = Modifier
-            .width(120.dp)
+            .width(140.dp)
             .aspectRatio(1f)
             .clip(CircleShape)
             .background(MaterialTheme.colorScheme.surface)
@@ -46,5 +48,4 @@ fun ProfileImage() {
             tint = ExtendedTheme.placeHolder
         )
     }
-
 }

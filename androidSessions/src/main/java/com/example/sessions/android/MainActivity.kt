@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
                     localNavController provides navController,
                     LocalAuthState provides authStateController.state.value
                 ) {
-                    M3Theme(darkTheme = true) {
+                    M3Theme() {
                         NotificationQueue(get()) {
                             ModalBottomSheetLayout(
                                 bottomSheetNavigator,

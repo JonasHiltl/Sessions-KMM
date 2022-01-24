@@ -25,6 +25,7 @@ object Deps {
     }
 
     object Compose {
+        const val coil = "io.coil-kt:coil-compose:${Versions.coil}"
         const val compiler = "androidx.compose.compiler:compiler:${Versions.composeCompiler}"
         const val ui = "androidx.compose.ui:ui:${Versions.compose}"
         const val uiGraphics = "androidx.compose.ui:ui-graphics:${Versions.compose}"
@@ -38,8 +39,10 @@ object Deps {
     }
 
     object ComposeDestinations {
-        const val core = "io.github.raamcosta.compose-destinations:animations-core:${Versions.composeDestinations}"
-        const val kspPlugin = "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
+        const val core =
+            "io.github.raamcosta.compose-destinations:animations-core:${Versions.composeDestinations}"
+        const val kspPlugin =
+            "io.github.raamcosta.compose-destinations:ksp:${Versions.composeDestinations}"
     }
 
     object Google {
@@ -82,6 +85,7 @@ object Deps {
         const val runtime = "com.squareup.sqldelight:runtime:${Versions.sqlDelight}"
         const val android = "com.squareup.sqldelight:android-driver:${Versions.sqlDelight}"
         const val native = "com.squareup.sqldelight:native-driver:${Versions.sqlDelight}"
-        const val coroutines = "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
+        const val coroutines =
+            "com.squareup.sqldelight:coroutines-extensions:${Versions.sqlDelight}"
     }
 }
