@@ -1,6 +1,7 @@
 package com.example.sessions.android.ui.screens.home.search.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.TextField
@@ -15,7 +16,10 @@ import com.example.sessions.android.ui.components.CustomTextField
 import com.example.sessions.android.ui.theme.Spacing
 
 @Composable
-fun AppBar() {
+fun AppBar(
+    query: String,
+    onUpdateQuery: (String) -> Unit
+) {
     val navController = localNavController.current
 
     Row(
@@ -24,7 +28,7 @@ fun AppBar() {
             .padding(horizontal = Spacing.m, vertical = Spacing.s),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        CustomTextField(value = "Search", onValueChange = {})
+        BasicTextField(value = query, onValueChange = onUpdateQuery)
         IconButton(onClick = {
             navController.popBackStack()
         }) {

@@ -16,8 +16,10 @@ import com.example.sessions.android.ui.annimations.FadeInOutTransition
 import com.example.sessions.android.ui.components.StatusBarInset
 import com.example.sessions.android.ui.screens.home.search.components.AppBar
 import com.example.sessions.android.ui.theme.Spacing
+import com.example.sessions.presentation.home.search.SearchEvents
 import com.ramcosta.composedestinations.annotation.Destination
 import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import org.koin.androidx.compose.get
 
 @OptIn(
     ExperimentalAnimationApi::class,
@@ -26,11 +28,19 @@ import com.ramcosta.composedestinations.navigation.DestinationsNavigator
 @Destination(style = FadeInOutTransition::class)
 @Composable
 fun SearchScreen(
-    navigator: DestinationsNavigator
+    navigator: DestinationsNavigator,
+    viewModel: SearchViewModel = get()
 ) {
     Scaffold() {
         StatusBarInset {
-            AppBar()
+            AppBar(
+                query = viewModel.state.value.query,
+                onUpdateQuery = {
+                    viewModel.onTriggerEvent(
+                        SearchEvents.OnUpdateQuery(it)
+                    )
+                }
+            )
         }
     }
 }

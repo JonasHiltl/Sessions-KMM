@@ -33,7 +33,7 @@ object Versions {
 
     const val mapbox = "10.2.0"
 
-    const val composeDestinations = "1.1.3-beta"
+    const val composeDestinations = "1.1.6-beta"
 
     const val coil = "1.4.0"
 }
