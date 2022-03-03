@@ -19,18 +19,23 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.example.sessions.android.localNavController
 import com.example.sessions.android.ui.components.Avatar
+import com.example.sessions.android.ui.screens.destinations.SearchScreenDestination
 import com.example.sessions.android.ui.theme.ExtendedTheme
 import com.example.sessions.android.ui.theme.Spacing
 import com.example.sessions.model.Friend
 import com.example.sessions.model.Profile
 import com.example.sessions.presentation.home.profile.FriendListState
+import com.ramcosta.composedestinations.navigation.navigateTo
 import org.koin.androidx.compose.get
 
 @Composable
 fun FriendList(
     state: FriendListState = get<FriendListViewModel>().state.value
 ) {
+    val navController = localNavController.current
+
     LazyRow(
         Modifier.fillMaxWidth(),
         horizontalArrangement = Arrangement.spacedBy(Spacing.s),
@@ -38,7 +43,7 @@ fun FriendList(
     ) {
         item {
             IconButton(
-                onClick = { /*TODO*/ },
+                onClick = { navController.navigateTo(SearchScreenDestination) },
             ) {
                 Icon(Icons.Default.Add, contentDescription = "Add friend")
             }

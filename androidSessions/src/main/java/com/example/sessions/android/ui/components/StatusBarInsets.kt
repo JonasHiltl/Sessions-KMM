@@ -11,10 +11,12 @@ import com.google.accompanist.insets.statusBarsHeight
 fun StatusBarInset(
     content: @Composable () -> Unit,
 ) {
-    Column {
-        Spacer(modifier = Modifier
-            .statusBarsHeight()
-            .fillMaxWidth())
+    Column() {
+        Spacer(
+            modifier = Modifier
+                .statusBarsHeight()
+                .fillMaxWidth()
+        )
         content()
     }
 }

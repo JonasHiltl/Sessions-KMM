@@ -19,7 +19,5 @@ class KoinApplication : Application() {
             androidContext(this@KoinApplication)
             modules(listOf(appModule, networkModule, viewModelModule, interactorsModule))
         }
-
     }
-
 }

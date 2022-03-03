@@ -16,7 +16,7 @@ actual class KtorClientFactory {
             developmentMode = true
             install(Logging)
             install(HttpTimeout) {
-                requestTimeoutMillis = 1000
+                connectTimeoutMillis = 1000
             }
             install(JsonFeature) {
                 serializer = KotlinxSerializer(
@@ -28,7 +28,8 @@ actual class KtorClientFactory {
         }
 
         client.sendPipeline.intercept(HttpSendPipeline.State) {
-            val accessToken = if(token.isBlank()) settings.getString(Constants.AUTH_TOKEN) else token
+            val accessToken =
+                if (token.isBlank()) settings.getString(Constants.AUTH_TOKEN) else token
             context.headers.append("Authorization", "Bearer $accessToken")
         }
 

@@ -17,7 +17,7 @@ actual class KtorClientFactory {
             developmentMode = true
             install(Logging)
             install(HttpTimeout) {
-                requestTimeoutMillis = 1000
+                connectTimeoutMillis = 1000
             }
             install(JsonFeature) {
                 serializer = KotlinxSerializer(

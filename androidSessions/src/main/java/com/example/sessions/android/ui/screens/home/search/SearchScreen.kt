@@ -39,7 +39,7 @@ fun SearchScreen(
                     viewModel.onTriggerEvent(
                         SearchEvents.OnUpdateQuery(it)
                     )
-                }
+                },
             )
         }
     }
