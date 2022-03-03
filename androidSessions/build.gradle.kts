@@ -17,7 +17,7 @@ kotlin {
 }
 
 android {
-    compileSdk = 32
+    compileSdk = Versions.androidCompileSdk
     defaultConfig {
         applicationId = "com.example.sessions.android"
         minSdk = Versions.androidMinSdk
